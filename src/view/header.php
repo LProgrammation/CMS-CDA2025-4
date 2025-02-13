@@ -2,6 +2,7 @@
 <html>
     <header>
         <link rel="stylesheet" href="styles/css/bootstrap.css?v=<?=time()?>" />
+        <link rel="stylesheet" href="styles/css/dataTables.bootstrap5.css?v=<?=time()?>" />
         <link rel="stylesheet" href="styles/css/style.css?v=<?=time()?>" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     </header>
