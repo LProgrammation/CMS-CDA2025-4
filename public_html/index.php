@@ -32,6 +32,9 @@ $router->routeMap("GET", "/home", "home") ;
 
 $router->routeMap("GET", "/error", "error") ; 
 
+$router->routeMap("GET", "/site", "site");
+
+
 // call router for actual $uri 
 $router->match($uri) ; 
 
