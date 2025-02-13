@@ -5,8 +5,7 @@ class LogsModel{
         $pdo=BDD::getInstance();
         $requete="SELECT * FROM cms_logs";
         $pdoStatement=$pdo->query($requete);
-        $tab_logs=$pdoStatement->fetchAll();
-        return $tab_logs;
+        return $pdoStatement->fetchAll();
     }
     public function getLogsById($id): mixed
     {

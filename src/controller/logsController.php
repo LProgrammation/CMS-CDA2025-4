@@ -1,7 +1,7 @@
 <?php
 class LogsController
 {
-    public function index($routeMap, $uri)
+    public function index($routeMap, $uri): void
     {
         require_once "../src/model/BDD.php";
         require_once "../src/model/" . $routeMap[$uri]['name'] . "Model.php";

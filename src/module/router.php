@@ -5,11 +5,13 @@
 class router {
 
     private $routeMap = array();
+
     /**
      * Generate route map
      * @param string $method
-     * @param string $url
+     * @param string $uri
      * @param string $name
+     * @param null $target
      * @return void
      */
     public function routeMap(string $method, string $uri, string $name, $target = null){
@@ -23,14 +25,14 @@ class router {
     /**
      * Check uri match in route map
      * @param mixed $uri
+     * @param $BDD
      * @return void
      */
-    public function match($uri, $BDD){
+    public function match(mixed $uri, $BDD): void
+    {
         try{
             // If route exist
-            if(isset($this->routeMap[$uri])){
-                return $this->pageGeneration($this->routeMap, $uri, $BDD) ;  
-            }
+            if(isset($this->routeMap[$uri])) $this->pageGeneration($this->routeMap, $uri, $BDD) ;
             else{
                 // redirect to error page
                 header("Location:/error?code=404");
@@ -48,7 +50,8 @@ class router {
      * @param array $routeMap
      * @return void
      */
-    public function pageGeneration(array $routeMap, string $uri, $BDD){
+    public function pageGeneration(array $routeMap, string $uri, $BDD): void
+    {
         
         require "../src/controller/".$routeMap[$uri]['name']."Controller.php" ;  
         $controller = $routeMap[$uri]["name"]."Controller";
