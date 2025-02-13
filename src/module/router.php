@@ -25,11 +25,11 @@ class router {
      * @param mixed $uri
      * @return void
      */
-    public function match($uri){
+    public function match($uri, $BDD){
         try{
             // If route exist
             if(isset($this->routeMap[$uri])){
-                return $this->pageGeneration($this->routeMap, $uri) ;  
+                return $this->pageGeneration($this->routeMap, $uri, $BDD) ;  
             }
             else{
                 // redirect to error page
@@ -48,11 +48,12 @@ class router {
      * @param array $routeMap
      * @return void
      */
-    public function pageGeneration(array $routeMap, string $uri){
+    public function pageGeneration(array $routeMap, string $uri, $BDD){
         
         require "../src/controller/".$routeMap[$uri]['name']."Controller.php" ;  
         $controller = $routeMap[$uri]["name"]."Controller";
         $controller = new $controller() ; 
+        $controller->setBDD($BDD)
         ?>
         <!DOCTYPE html>
         <html lang="en">
