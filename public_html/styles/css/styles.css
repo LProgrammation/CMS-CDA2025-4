@@ -21,3 +21,10 @@ body{
     justify-content: center;
     align-items: center;
 }
+
+#login_form {
+    max-width: 800px;
+    width: 100%;
+    padding: 80px;
+}
+
