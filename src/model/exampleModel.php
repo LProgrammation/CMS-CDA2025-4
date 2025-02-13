@@ -11,19 +11,19 @@ class exampleModel
      */
     public function getExampleInfo(): mixed
     {
-        
-        // Insert sql request to get info about something like users or others things    
+
+        // Insert sql request to get info about something like users or others things
         return true;
     }
 
     public function getExampleInfoById($id): mixed
     {
-        
-        // Insert sql request to get info about something like users or others things by id 
+
+        // Insert sql request to get info about something like users or others things by id
         return true;
     }
 
-    
-    
-   
+
+
+
 }
