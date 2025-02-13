@@ -1,5 +1,4 @@
 <?php
-require '../src/model/BDD.php';
 Class UserModel{
 
 

@@ -1,4 +1,4 @@
-<body>
+
     <?php
         switch ($_GET['code']) : 
             case '401':
@@ -10,4 +10,4 @@
         endswitch;
 
     ?>
-</body>
+

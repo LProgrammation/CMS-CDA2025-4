@@ -11,7 +11,10 @@ $options = [
 
 $arguments = getopt("", $options);
 
-if (isset($arguments['mode'])) {
+if (!isset($arguments['mode'])) {
+    echo "The mode option is required";
+}
+else {
     switch ($arguments['mode']) {
         case 'next':
             // Insert next action code
@@ -27,10 +30,7 @@ if (isset($arguments['mode'])) {
             break;
         default:
             // Insert default action code
-            echo "Error: please enter valide migration mode (next, prev, migrate or reset" ;
+            echo "Error: please enter valide migration mode (next, prev, migrate or reset";
             break;
     }
-}
-else{
-    echo "The mode option is required";
 }
