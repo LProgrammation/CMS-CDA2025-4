@@ -30,7 +30,10 @@ $router = new router();
 // Initialisation of all routes for users
 $router->routeMap("GET", "/home", "home") ; 
 
-$router->routeMap("GET", "/error", "error") ; 
+$router->routeMap("GET", "/error", "error") ;
+
+$router->routeMap("GET", "/login", "login") ;
+
 
 // call router for actual $uri 
 $router->match($uri) ; 
