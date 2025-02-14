@@ -31,6 +31,10 @@ $router = new router();
 // Initialisation of all routes for users
 $router->routeMap("GET", "/home", "home") ;
 
+$router->routeMap("GET", "/page", "page") ;
+$router->routeMap("GET", "/page/new-page", "page", "new-page") ;
+$router->routeMap("GET", "/page/gestion-page", "page", "gestion-page") ;
+
 $router->routeMap("GET", "/logs", "logs") ;
 
 $router->routeMap("GET", "/error", "error") ;
