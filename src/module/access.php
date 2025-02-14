@@ -1,5 +1,5 @@
 <?php
-require_once("../src/model/exampleModel.php");
+require_once("../src/model/userModel.php");
 /**
  * Summary of Access
  */
@@ -9,10 +9,10 @@ class Access {
      * @param mixed $role_check
      * @return bool
      */
-    public function isGranted($role_check = 'customer'): bool {
+    public function isGranted(string $role_check = 'user'): bool {
         if ($this->isLogin()) {
-            $exampleModel = new exampleModel(); // This have to be replace by usersModel class with user informations get in BDD
-            $user_info = $exampleModel->getExampleInfoById($_SESSION['user']['id']);
+            $userModel = new userModel(); // This have to be replace by usersModel class with user informations get in BDD
+            $user_info = $userModel->getUserById($_SESSION['user']['id']);
 
             return $user_info && $role_check === $user_info[0]['role'];
         }

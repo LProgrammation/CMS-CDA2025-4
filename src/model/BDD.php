@@ -13,10 +13,10 @@ class BDD
 
     private static ?BDD $instance = null;
     private PDO $pdo;
-    private $dsn;
-    private $username;
+    private string $dsn;
+    private mixed $username;
 
-    private $password;
+    private mixed $password;
 
     /**
      * Summary of __construct
@@ -45,38 +45,22 @@ class BDD
     /**
      * @return BDD|null
      */
-    public static function getInstance(): ?BDD
+    public static function getInstance(): ?PDO
     {
         if (self::$instance === null) {
             self::$instance = new self();
         }
-        return self::$instance;
+        return self::$instance->pdo;
     }
 
     /**
      * @return void
      */
-    public function __clone()
-    {
-    }
+    public function __clone(){}
 
     /**
      * @return void
      */
-    public function __wakeup()
-    {
-    }
+    public function __wakeup(){}
 
-    /**
-     * @return void
-     */
-    public function tryConnection(): void
-    {
-        if ($this->pdo === null) {
-            echo "Connexion die";
-        } else {
-            echo "connexion success";
-        }
-
-    }
 }

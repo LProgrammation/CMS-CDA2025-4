@@ -4,15 +4,18 @@
  */
 class router {
 
-    private $routeMap = array();
+    private array $routeMap ;
+
     /**
      * Generate route map
      * @param string $method
-     * @param string $url
+     * @param string $uri
      * @param string $name
+     * @param null $target
      * @return void
      */
-    public function routeMap(string $method, string $uri, string $name, $target = null){
+    public function routeMap(string $method, string $uri, string $name, $target = null): void
+    {
         $this->routeMap[$uri]['name'] = $name;
         $this->routeMap[$uri]['method'] = $method;
         $this->routeMap[$uri]['url'] = $uri;
@@ -25,12 +28,11 @@ class router {
      * @param mixed $uri
      * @return void
      */
-    public function match($uri, $BDD){
+    public function match(mixed $uri): void
+    {
         try{
             // If route exist
-            if(isset($this->routeMap[$uri])){
-                return $this->pageGeneration($this->routeMap, $uri, $BDD) ;  
-            }
+            if(isset($this->routeMap[$uri])) $this->pageGeneration($this->routeMap, $uri) ;
             else{
                 // redirect to error page
                 header("Location:/error?code=404");
@@ -46,27 +48,22 @@ class router {
     /**
      * generate view container with route map content and uri
      * @param array $routeMap
+     * @param string $uri
      * @return void
      */
-    public function pageGeneration(array $routeMap, string $uri, $BDD){
+    public function pageGeneration(array $routeMap, string $uri): void
+    {
         
-        require "../src/controller/".$routeMap[$uri]['name']."Controller.php" ;  
+        require "../src/controller/".$routeMap[$uri]['name']."Controller.php" ;
         $controller = $routeMap[$uri]["name"]."Controller";
-        $controller = new $controller() ; 
-        $controller->setBDD($BDD)
+        $controller = new $controller() ;
+
+        require_once "../src/view/header.php";
         ?>
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title><?php echo $routeMap[$uri]['name']?></title>
-            <link rel="stylesheet" href="../styles/css/styles.css">
-        </head>
         <?php $controller->index($routeMap, $uri); ?>
-        </html>
         <?php
-       
+        require_once "../src/view/footer.php";
+
         
     }
 };

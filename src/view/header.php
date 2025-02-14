@@ -1,12 +1,23 @@
+
+<?php
+/** @var array $routeMap */
+/** @var string $uri */
+?>
 <!DOCTYPE html>
-<html>
-    <header>
+<html lang="en">
+
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><?php echo $routeMap[$uri]['name']?></title>
+        <link rel="stylesheet" href="../styles/css/styles.css">
         <link rel="stylesheet" href="styles/css/bootstrap.css?v=<?=time()?>" />
         <link rel="stylesheet" href="styles/css/style.css?v=<?=time()?>" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    </header>
+    </head>
     <body>
-        <head>
+        <header>
         <div class="border-bottom w-100 p-3">
             <nav class="d-flex justify-content-around container">
                 <ul>
@@ -28,5 +39,5 @@
                 </ul>
             </nav>
         </div>
-        </head>
+        </header>
         <main class="container pt-5">

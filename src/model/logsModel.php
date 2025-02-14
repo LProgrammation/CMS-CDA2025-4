@@ -2,11 +2,17 @@
 class LogsModel{
     public function getLogs(): mixed
     {
-        $pdo=BDD::getInstance();
-        $requete="SELECT * FROM cms_logs";
-        $pdoStatement=$pdo->query($requete);
-        $tab_logs=$pdoStatement->fetchAll();
-        return $tab_logs;
+        try {
+
+            $pdo=BDD::getInstance();
+            $requete="SELECT * FROM cms_logs";
+            $pdoStatement=$pdo->query($requete);
+            return $pdoStatement->fetchAll();
+        }
+        catch (PDOException $e) {
+            echo $e->getMessage();
+            return [];
+        }
     }
     public function getLogsById($id): mixed
     {
