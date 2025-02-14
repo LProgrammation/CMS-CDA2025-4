@@ -26,9 +26,10 @@
                     <a href="/site" class="p-2">site</a>
                     <?php
                     if (isset($_SESSION['user'])) {
-                        ?>
-                        <a href="/logout" class="p-2">Deconnexion</a>
-                        <?php
+                        if ($_SESSION['user']['role_user'] == 'admin') {
+                            echo '<a href="/user_management" class="p-2">Gestion des comptes</a>';
+                        }
+                        echo '<a href="/logout" class="p-2">Deconnexion</a>';
                     }else{
                         ?>
                         <a href="/login" class="p-2">Se Connecter</a>

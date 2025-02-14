@@ -10,7 +10,6 @@ class UserModel
         $res = $stmt->fetchall(PDO::FETCH_ASSOC);
         if ($res) {
             return $res;
-
         }
         return false;
     }

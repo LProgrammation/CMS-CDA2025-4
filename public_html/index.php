@@ -40,6 +40,8 @@ $router->routeMap("GET", "/register", "register");
 
 $router->routeMap("GET", "/logout", "logout");
 
+$router->routeMap("GET", "/user_management", "user_management");
+
 
 // call router for actual $uri 
 $router->match($uri) ; 
