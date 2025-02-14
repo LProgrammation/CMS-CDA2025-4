@@ -7,7 +7,7 @@ Class migrationModel {
     public function getMigrations(): array
     {
         $pdo = BDD::getInstance() ;
-        $stmt = $pdo->prepare("SELECT * FROM Migrations");
+        $stmt = $pdo->query("SELECT * FROM Migrations");
         return $stmt->fetchAll();
 
     }
@@ -19,7 +19,17 @@ Class migrationModel {
     {
         $pdo = BDD::getInstance() ;
         $stmt = $pdo->query("SELECT * FROM Migrations ORDER BY id DESC LIMIT 1");
-        return $stmt->fetchColumn();
+        return $stmt->fetchAll();
+
+    }
+    /**
+     * @return mixed
+     */
+    public function getPrevMigration(): mixed
+    {
+        $pdo = BDD::getInstance() ;
+        $stmt = $pdo->query("SELECT * FROM Migrations ORDER BY id DESC LIMIT 1 OFFSET 1");
+        return $stmt->fetchAll();
 
     }
 
@@ -40,16 +50,16 @@ Class migrationModel {
     }
 
     /**
-     * @param $id
+     * @param $name
      * @return void
      */
-    public function deleteMigrationsById($id): void
+    public function deleteMigrationsByName($name): void
     {
         try{
 
             $pdo = BDD::getInstance() ;
-            $stmt = $pdo->prepare("DELETE FROM migrations WHERE id = :id");
-            $stmt->bindParam(":id", $id);
+            $stmt = $pdo->prepare("DELETE FROM migrations WHERE name = :name");
+            $stmt->bindParam(":name", $name);
             $stmt->execute();
             $res = $stmt->fetchall(PDO::FETCH_ASSOC);
         }

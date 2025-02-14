@@ -19,7 +19,7 @@ if($args) {
     $lastname = $args['lastname'];
     $email = $args['email'];
     $password = $args['password'];
-    $role = $args['role'];
+    (isset($args['role'])) ? $role = $args['role'] : $role = "utilisateur";
 }
 
 if(isset($firstname, $lastname, $email, $password, $role)) {

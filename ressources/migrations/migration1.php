@@ -1,33 +1,31 @@
 <?php
 
 Class migration1 {
-    /**
-     * @param PDO $pdo
-     * @return void
-     */
     public function up(PDO $pdo) {
         try {
             $pdo = BDD::getInstance() ;
-            $stmt = $pdo->prepare("CREATE TABLE IF NOT EXISTS users (id string primary key auto_increment, firstname varchar(48), lastname varchar(48), email varchar(255), password varchar(255), role enum('user', 'admin'))");
+            $stmt = $pdo->prepare("CREATE TABLE IF NOT EXISTS User(id varchar(36) primary key, firstname varchar(48), lastname varchar(48), email varchar(255), password varchar(255), role enum('user', 'admin'))");
             $stmt->execute();
+            return true;
         }
         catch (PDOException $e) {
             echo $e->getMessage();
+            return false ;
         }
+
     }
 
-    /**
-     * @param PDO $pdo
-     * @return void
-     */
+
     public function down(PDO $pdo) {
         try {
             $pdo = BDD::getInstance() ;
-            $stmt = $pdo->prepare("DROP TABLE IF EXISTS users");
+            $stmt = $pdo->prepare("DROP TABLE IF EXISTS User");
             $stmt->execute();
+            return true;
         }
         catch (PDOException $e) {
             echo $e->getMessage();
+            return false ;
         }
     }
 }

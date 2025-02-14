@@ -5,7 +5,7 @@ Class UserModel{
     public function getUsers(): false|array
     {
         $pdo = BDD::getInstance() ;
-        $stmt = $pdo->prepare("SELECT * FROM Users");
+        $stmt = $pdo->prepare("SELECT * FROM User");
         $stmt->execute();
         $res = $stmt->fetchall(PDO::FETCH_ASSOC);
         if ($res) {
@@ -19,7 +19,7 @@ Class UserModel{
     {
 
         $pdo = BDD::getInstance();
-        $stmt = $pdo->prepare("SELECT * FROM Users WHERE email=:email");
+        $stmt = $pdo->prepare("SELECT * FROM User WHERE email=:email");
         $stmt->bindParam(":email",$email);
         $stmt->execute();
         $res = $stmt->fetchall(PDO::FETCH_ASSOC);
@@ -34,7 +34,7 @@ Class UserModel{
     {
 
         $pdo = BDD::getInstance();
-        $stmt = $pdo->prepare("SELECT * FROM Users WHERE id=:id");
+        $stmt = $pdo->prepare("SELECT * FROM User WHERE id=:id");
         $stmt->bindParam(":id",$id);
         $stmt->execute();
         $res = $stmt->fetchall(PDO::FETCH_ASSOC);
@@ -50,7 +50,7 @@ Class UserModel{
         try {
 
             $pdo = BDD::getInstance();
-            $stmt = $pdo->prepare("INSERT INTO Users VALUES (:id, :lastname, :firstname, :email, :password, :role)");
+            $stmt = $pdo->prepare("INSERT INTO User VALUES (:id, :lastname, :firstname, :email, :password, :role)");
             $stmt->bindParam(":id", $id);
             $stmt->bindParam(":firstname", $firstname);
             $stmt->bindParam(":lastname", $lastname);
