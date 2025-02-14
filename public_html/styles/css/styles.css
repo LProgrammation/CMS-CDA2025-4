@@ -22,9 +22,29 @@ body{
     align-items: center;
 }
 
-#login_form {
+#login_form, #register_form {
     max-width: 800px;
     width: 100%;
     padding: 80px;
+}
+
+#logout_form {
+    max-width: 800px;
+    width: 100%;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#logout_buttons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.logout_button {
+    margin: 10px;
+    min-width: 150px;
 }
 

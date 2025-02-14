@@ -28,11 +28,15 @@ if ($cleanUri != $uri) {
 $router = new router();
 
 // Initialisation of all routes for users
-$router->routeMap("GET", "/home", "home") ; 
+$router->routeMap("GET", "/home", "home");
 
-$router->routeMap("GET", "/error", "error") ;
+$router->routeMap("GET", "/error", "error");
 
-$router->routeMap("GET", "/login", "login") ;
+$router->routeMap("GET", "/login", "login");
+
+$router->routeMap("GET", "/register", "register");
+
+$router->routeMap("GET", "/logout", "logout");
 
 
 // call router for actual $uri 
