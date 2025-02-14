@@ -56,11 +56,11 @@ class BDD
     /**
      * @return void
      */
-    private function __clone(){}
+    public function __clone(){}
 
     /**
      * @return void
      */
-    private function __wakeup(){}
+    public function __wakeup(){}
 
 }
