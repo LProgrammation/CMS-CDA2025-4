@@ -1,11 +1,11 @@
 <?php
-Class UserModel{
 
-
+class UserModel
+{
     public function getUsers(): false|array
     {
-        $pdo = BDD::getInstance() ;
-        $stmt = $pdo->prepare("SELECT * FROM Users");
+        $pdo = BDD::getInstance();
+        $stmt = $pdo->prepare("SELECT * FROM User");
         $stmt->execute();
         $res = $stmt->fetchall(PDO::FETCH_ASSOC);
         if ($res) {
@@ -19,8 +19,8 @@ Class UserModel{
     {
 
         $pdo = BDD::getInstance();
-        $stmt = $pdo->prepare("SELECT * FROM Users WHERE email=:email");
-        $stmt->bindParam(":email",$email);
+        $stmt = $pdo->prepare("SELECT * FROM User WHERE email_user=:email");
+        $stmt->bindParam(":email", $email);
         $stmt->execute();
         $res = $stmt->fetchall(PDO::FETCH_ASSOC);
         if ($res) {
@@ -34,8 +34,8 @@ Class UserModel{
     {
 
         $pdo = BDD::getInstance();
-        $stmt = $pdo->prepare("SELECT * FROM Users WHERE id=:id");
-        $stmt->bindParam(":id",$id);
+        $stmt = $pdo->prepare("SELECT * FROM User WHERE id_user=:id");
+        $stmt->bindParam(":id", $id);
         $stmt->execute();
         $res = $stmt->fetchall(PDO::FETCH_ASSOC);
         if ($res) {
@@ -45,12 +45,13 @@ Class UserModel{
         return false;
     }
 
-    public function registerUsers(string $id, string $firstname, string $lastname, string $email, string $password, string $role): void
+    public function registerUsers(string $firstname, string $lastname, string $email, string $password, string $role="utilisateur")
     {
         try {
-
+            require_once __DIR__ . '/../module/uuid.php';
             $pdo = BDD::getInstance();
-            $stmt = $pdo->prepare("INSERT INTO Users VALUES (:id, :lastname, :firstname, :email, :password, :role)");
+            $stmt = $pdo->prepare("INSERT INTO User (`id_user`, `role_user`, `password_user`, `email_user`, `nom_user`, `prenom_user`) VALUES (:id, :role, :password, :email, :lastname, :firstname)");
+            $id = guidv4();
             $stmt->bindParam(":id", $id);
             $stmt->bindParam(":firstname", $firstname);
             $stmt->bindParam(":lastname", $lastname);
@@ -58,9 +59,10 @@ Class UserModel{
             $stmt->bindParam(":password", $password);
             $stmt->bindParam(":role", $role);
             $stmt->execute();
-        }
-        catch (PDOException $e) {
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
             echo "error : ", $e->getMessage();
+            return null;
         }
     }
 }

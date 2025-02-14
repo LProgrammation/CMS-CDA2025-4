@@ -5,7 +5,6 @@
 class router {
 
     private array $routeMap ;
-
     /**
      * Generate route map
      * @param string $method
