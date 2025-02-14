@@ -10,15 +10,15 @@ class registerController{
 
         // Variables utilisées pour réafficher les valeurs dans le formulaire en cas d'erreur
         $email = $_POST['email_user'] ?? '';
-        $nom = $_POST['nom_user'] ?? '';
-        $prenom = $_POST['prenom_user'] ?? '';
+        $nom = $_POST['name_user'] ?? '';
+        $prenom = $_POST['firstname_user'] ?? '';
 
         // Vérification de la soumission du formulaire
-        if (isset($_POST['email_user']) && isset($_POST['nom_user']) && isset($_POST['prenom_user']) && isset($_POST['password_user'])) {
+        if (isset($_POST['email_user']) && isset($_POST['name_user']) && isset($_POST['firstname_user']) && isset($_POST['password_user'])) {
 
             // Mise en variable pour simplifier l'utilisation dans la suite du code
-            $prenom = $_POST['prenom_user'];
-            $nom = $_POST['nom_user'];
+            $prenom = $_POST['firstname_user'];
+            $nom = $_POST['name_user'];
             $email = $_POST['email_user'];
             $password = $_POST['password_user'];
 

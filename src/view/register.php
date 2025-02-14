@@ -11,11 +11,11 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Nom :</label>
-            <input type="text" class="form-control" name="nom_user" value="<?= $nom ?>">
+            <input type="text" class="form-control" name="name_user" value="<?= $nom ?>">
         </div>
         <div class="mb-3">
             <label class="form-label">Prénom :</label>
-            <input type="text" class="form-control" name="prenom_user" value="<?= $prenom ?>">
+            <input type="text" class="form-control" name="firstname_user" value="<?= $prenom ?>">
         </div>
         <div class="mb-3">
             <label class="form-label">Mot de passe :</label>

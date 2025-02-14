@@ -50,7 +50,7 @@ class UserModel
         try {
             require_once __DIR__ . '/../module/uuid.php';
             $pdo = BDD::getInstance();
-            $stmt = $pdo->prepare("INSERT INTO User (`id_user`, `role_user`, `password_user`, `email_user`, `nom_user`, `prenom_user`) VALUES (:id, :role, :password, :email, :lastname, :firstname)");
+            $stmt = $pdo->prepare("INSERT INTO User (`id_user`, `role_user`, `password_user`, `email_user`, `name_user`, `firstname_user`) VALUES (:id, :role, :password, :email, :lastname, :firstname)");
             $id = guidv4();
             $stmt->bindParam(":id", $id);
             $stmt->bindParam(":firstname", $firstname);
