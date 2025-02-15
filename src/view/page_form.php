@@ -1,4 +1,4 @@
-<form action="/page/new-page?id_site=1" method="post" class="d-flex flex-row justify-content-between">
+<form action="/page" method="post" class="d-flex flex-row justify-content-between">
     <div>
         <input type="hidden" name="create_page" id="id_site" value="1">
         <input type="hidden" name="id_site" id="id_site" value="<?=$_GET['id_site']??'1'?>">
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div>
-        <button type="submit" class="btn btn-primary">Envoyer</button>
+        <button type="submit" class="btn btn-primary" name="name_form" value="create_page">Envoyer</button>
     </div>
 
 </form>
