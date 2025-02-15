@@ -16,7 +16,7 @@ class Access {
             $userModel = new userModel(); // This have to be replace by usersModel class with user informations get in BDD
             $user_info = $userModel->getUserById($_SESSION['user']['id_user']);
 
-            return $user_info && $role_check === $user_info[0]['role'];
+            return $user_info && $role_check === $user_info[0]['role_user'];
         }
 
         return false;

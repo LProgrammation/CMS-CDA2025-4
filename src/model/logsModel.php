@@ -41,24 +41,26 @@ class LogsModel{
         $pdoStatement=$pdo->query($requete);
         return $pdoStatement->fetchAll();
     }
-    public function setLogs($user_id, $action_log)
+    public function setLogs($id_log, $user_id, $date_log, $action_log)
     {
         $pdo=BDD::getInstance();
-        $requete="
+        $requete='
         INSERT INTO
             log
             (
+                id_log,
                 id_user,
-                date_loo,
+                date_log,
                 action_log
             )
         VALUES
             (
-                ".$user_id.",
+                "'.$id_log.'",
+                "'.$user_id.'",
                 NOW(),
-                '".$action_log."'
+                "'.$action_log.'"
             )
-        ";
+        ';
         return $pdo->query($requete);
     }
 }

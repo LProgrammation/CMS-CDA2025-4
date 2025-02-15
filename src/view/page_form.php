@@ -28,8 +28,10 @@
         </div>
 
         <div>
-            <label for="title_page">Par par défaut ?</label>
+            <label for="is_default_page">Page par défaut ?</label>
             <input type="checkbox" name="is_default_page" id="is_default_page">
+
+
         </div>
     </div>
     <div>

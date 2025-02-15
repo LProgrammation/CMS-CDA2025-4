@@ -8,9 +8,9 @@ Use Src\Model\UserModel ;
 $options= [
     "firstname_user:",
     "name_user:",
-    "email:",
-    "password:",
-    "role:",
+    "email_user:",
+    "password_user:",
+    "role_user:",
 ] ;
 
 $args = getopt('', $options);
@@ -26,8 +26,9 @@ if($args) {
 if(isset($firstname_user, $name_user, $email_user, $password_user, $role_user)) {
     $userModel = new userModel();
     try {
-        $password = password_hash($password_user, PASSWORD_DEFAULT);
-        $userModel->registerUser(guidv4(), $firstname_user, $name_user, $email_user, $password_user, $role_user);
+        $password_user = password_hash($password_user, PASSWORD_DEFAULT);
+        $Uuid = new \Src\Module\Uuid();
+        $userModel->registerUsers($Uuid->guidv4(), $firstname_user, $name_user, $email_user, $password_user, $role_user);
     } catch (\Random\RandomException $e) {
         echo $e->getMessage();
     }

@@ -3,17 +3,21 @@
  * Summary of homeController
  */
 namespace Src\Controller ;
+use DateTime;
 use \Src\Model\PageModel ;
 use \Src\Model\LogsModel ;
 use \Src\Module\Access ;
+use \Src\Module\Uuid ;
 class pageController{
     public function index($routeMap, $uri){
-
+        $Uuid = new Uuid() ;
         $accessModule = new Access();
         $accessModule->isGranted();
 
         $page_model=new pageModel();
         $logs_model=new LogsModel();
+        $date = new DateTime();
+
         switch($routeMap[$uri]['target']){
             case 'new-page':
                 $is_there_header=False;
@@ -54,20 +58,21 @@ class pageController{
                                     $page_model->updateDefaultPage($_POST['id_site'], $_POST['id_default_page']);
                                 }
                             }
-                            $logs_model->setLogs($_SESSION['id_user'], "Modification des pages du site avec l'id :$id_site");
+                            $logs_model->setLogs($Uuid->guidV4(), $_SESSION['user']['id_user'], $date->format("Y-m-d H:i:s"),    "Modification des pages du site avec l'id :$id_site");
                             break;
                         case 'create_page':
                             require_once "../src/module/uuid.php";
-                            $id_new_page=$page_model->newPage($_POST['id_site'],$_POST['title_page'], $_POST['type_page']??'main',  $_POST['is_default_page']??'0');
+                            ($_POST['is_default_page']) ? $_POST['is_default_page']=1 : $_POST['is_default_page']=0;
+                            $id_new_page=$page_model->newPage($_POST['id_site'],$_POST['title_page'], $_POST['type_page']??'main',  $_POST['is_default_page']);
                             if(isset($_POST['is_default_page'])){
                                 $page_model->updateDefaultPage($_POST['id_site'], $id_new_page);
                             }
-                            $logs_model->setLogs($_SESSION['id_user'], "Création d'une nouvelle page avec l'id :$id_new_page pour le site avec l'id :$id_site");
+                            $logs_model->setLogs($Uuid->guidV4(), $_SESSION['user']['id_user'], $date->format("Y-m-d H:i:s"), "Création d'une nouvelle page avec l'id :$id_new_page pour le site avec l'id :$id_site");
 
                             break;
                         case 'save_page':
                             $page_model->savePage($_POST['id_site'],$_POST['id_page'],$_POST['content']);
-                            $logs_model->setLogs($_SESSION['id_user'], "Modification de la page avec l'id :".$_POST['id_page']." pour le site avec l'id :$id_site");
+                            $logs_model->setLogs($Uuid->guidV4(), $_SESSION['user']['id_user'], $date->format("Y-m-d H:i:s"), "Modification de la page avec l'id :".$_POST['id_page']." pour le site avec l'id :$id_site");
                             break;
                     }
                 }

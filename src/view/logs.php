@@ -17,10 +17,10 @@
             ?>
             <tr>
                 <td><?=$compteur; ?></td>
-                <td><?=$log['id_logs']; ?></td>
+                <td><?=$log['id_log']; ?></td>
                 <td><?=$log['id_user']; ?></td>
-                <td><?=$log['date_logs']; ?></td>
-                <td><?=$log['action_logs']; ?></td>
+                <td><?=$log['date_log']; ?></td>
+                <td><?=$log['action_log']; ?></td>
             </tr>
             <?php
             $compteur++;

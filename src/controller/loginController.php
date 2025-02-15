@@ -1,5 +1,6 @@
 <?php
-
+namespace Src\Controller;
+use \Src\Model\UserModel;
 /**
  * Summary of homeController
  */
@@ -24,8 +25,6 @@ class loginController
             if (empty($email) || empty($password)) {
                 $message = 'Veuillez remplir tous les champs';
             } else {
-                // Chargement du model
-                require_once __DIR__ . '/../model/userModel.php';
 
                 // Instanciation du model
                 $authModel = new userModel();

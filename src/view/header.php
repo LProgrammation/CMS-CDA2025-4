@@ -45,20 +45,22 @@
                 <ul>
                     <a href="/home" class="p-2">Accueil</a>
                     <?php /** @var TYPE_NAME $access */
-                    if($access->isGranted("admin")) :?>
+                    if($access->isGranted()) :?>
+                        <a href="/page" class="p-2">page</a>
+
+                    <?php endif;?>
+                    <?php if($access->isGranted("admin")) :?>
                     <a href="/logs" class="p-2">logs</a>
-                    <a href="/page" class="p-2">page</a>
+                        <a href="/user_management" class="p-2">Gestion des comptes</a>
                     <?php endif;?>
                     <a href="/site" class="p-2">site</a>
                     <?php
                     if (isset($_SESSION['user'])) {
-                        ?>
-                        <a href="/disconnect" class="p-2">disconnect</a>
-                        <?php
+                        echo '<a href="/logout" class="p-2">Deconnexion</a>';
                     }else{
                         ?>
-                        <a href="/login" class="p-2">login</a>
-                        <a href="/register" class="p-2">register</a>
+                        <a href="/login" class="p-2">Se Connecter</a>
+                        <a href="/register" class="p-2">S'Inscrire</a>
                         <?php
                     }
                     ?>

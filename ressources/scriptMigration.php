@@ -71,5 +71,3 @@ switch ($arguments['mode']) {
         echo "Error: please enter valide migration mode (next, prev, migrate, reset, history or locallist)";
         break;
 }
-
-

@@ -1,4 +1,5 @@
 new DataTable('#datatable-logs');
+new DataTable('#user_management-datatable');
 console.log('Hello from style.js');
 document.addEventListener("DOMContentLoaded", function () {
     // Sélectionne toutes les checkboxes avec la classe spécifique
@@ -17,3 +18,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+

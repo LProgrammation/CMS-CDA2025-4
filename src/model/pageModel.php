@@ -40,10 +40,12 @@ class pageModel{
             FROM
                 page
             WHERE
-                id='".$id_page."'";
+                id_page='".$id_page."'";
         $pdoStatement=$pdo->query($requete);
+
         $content_page=$pdoStatement->fetch();
-        return $content_page['content'];
+        if($content_page) return $content_page['content_page'];
+        else return false;
     }
     public function getTitlePage($id_page)
     {
@@ -54,11 +56,12 @@ class pageModel{
             FROM
                 page
             WHERE
-                id='".$id_page."'";
+                id_page='".$id_page."'";
         $pdoStatement=$pdo->query($requete);
         $content_page=$pdoStatement->fetch();
-        $content  = $content_page['title'];
-        return $content;
+
+        if ($content_page) return $content_page['title_page'];
+        else return false;
     }
     public function getLogsByUserId($user_id)
     {
@@ -85,6 +88,7 @@ class pageModel{
         INSERT INTO
             page
             (
+                
                 id_page,
                 id_site,
                 title_page,

@@ -72,7 +72,7 @@ Class UserModel{
     {
         try {
             $pdo = BDD::getInstance();
-            $stmt = $pdo->prepare("INSERT INTO User (`id_user`, `role_user`, `password_user`, `email_user`, `nom_user`, `prenom_user`) VALUES (:id_user, :role_user, :password_user, :email_user, :name_user, :firstname_user)");
+            $stmt = $pdo->prepare("INSERT INTO User (`id_user`, `role_user`, `password_user`, `email_user`, `name_user`, `firstname_user`) VALUES (:id_user, :role_user, :password_user, :email_user, :name_user, :firstname_user)");
             $stmt->bindParam(":id_user", $id_user);
             $stmt->bindParam(":firstname_user", $firstname_user);
             $stmt->bindParam(":name_user", $name_user);
@@ -83,6 +83,44 @@ Class UserModel{
             return $stmt->rowCount();
         } catch (PDOException $e) {
             echo "error : ", $e->getMessage();
+            return null;
+        }
+    }
+
+    /**
+     * @param string $id_user
+     * @param string $firstname_user
+     * @param string $name_user
+     * @param string $email_user
+     * @param string $role_user
+     * @return int|null
+     */
+    public function updateUser(string $id_user, string $firstname_user, string $name_user, string $email_user, string $role_user)
+    {
+        try {
+            $pdo = BDD::getInstance();
+            $stmt = $pdo->prepare("UPDATE user SET role_user=:role_user, email_user=:email_user, name_user=:name_user, firstname_user=:firstname_user WHERE id_user = :id_user");
+            $stmt->bindParam(":id_user", $id_user);
+            $stmt->bindParam(":firstname_user", $firstname_user);
+            $stmt->bindParam(":name_user", $name_user);
+            $stmt->bindParam(":email_user", $email_user);
+            $stmt->bindParam(":role_user", $role_user);
+            $stmt->execute();
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
+    public function deleteUser(string $id)
+    {
+        try {
+            $pdo = BDD::getInstance();
+            $stmt = $pdo->prepare("DELETE FROM user WHERE id_user = :id");
+            $stmt->bindParam(":id", $id);
+            $stmt->execute();
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
             return null;
         }
     }
