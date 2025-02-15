@@ -1,5 +1,6 @@
 <?php
 namespace Src\Model ;
+use Src\Module\Uuid ;
 use PDO;
 use PDOException;
 Class UserModel{
@@ -9,8 +10,8 @@ Class UserModel{
      */
     public function getUsers(): false|array
     {
-        $pdo = BDD::getInstance() ;
-        $stmt = $pdo->prepare("SELECT * FROM user");
+        $pdo = BDD::getInstance();
+        $stmt = $pdo->prepare("SELECT * FROM User");
         $stmt->execute();
         $res = $stmt->fetchall(PDO::FETCH_ASSOC);
         if ($res) {
@@ -28,8 +29,8 @@ Class UserModel{
     {
 
         $pdo = BDD::getInstance();
-        $stmt = $pdo->prepare("SELECT * FROM user WHERE email=:email");
-        $stmt->bindParam(":email",$email_user);
+        $stmt = $pdo->prepare("SELECT * FROM User WHERE email_user=:email_user");
+        $stmt->bindParam(":email_user", $email_user);
         $stmt->execute();
         $res = $stmt->fetchall(PDO::FETCH_ASSOC);
         if ($res) {
@@ -47,8 +48,8 @@ Class UserModel{
     {
 
         $pdo = BDD::getInstance();
-        $stmt = $pdo->prepare("SELECT * FROM User WHERE id=:id");
-        $stmt->bindParam(":id_user",$id_user);
+        $stmt = $pdo->prepare("SELECT * FROM User WHERE id_user=:id_user");
+        $stmt->bindParam(":id_user", $id_user);
         $stmt->execute();
         $res = $stmt->fetchall(PDO::FETCH_ASSOC);
         if ($res) {
@@ -65,24 +66,24 @@ Class UserModel{
      * @param string $email_user
      * @param string $password_user
      * @param string $role_user
-     * @return void
+     * @return int|null
      */
-    public function registerUser(string $id_user, string $firstname_user, string $name_user, string $email_user, string $password_user, string $role_user): void
+    public function registerUsers(string $id_user, string $firstname_user, string $name_user, string $email_user, string $password_user, string $role_user = 'user')
     {
         try {
-
             $pdo = BDD::getInstance();
-            $stmt = $pdo->prepare("INSERT INTO User VALUES (:id_user, :name, :firstname, :email, :password, :role)");
+            $stmt = $pdo->prepare("INSERT INTO User (`id_user`, `role_user`, `password_user`, `email_user`, `nom_user`, `prenom_user`) VALUES (:id_user, :role_user, :password_user, :email_user, :name_user, :firstname_user)");
             $stmt->bindParam(":id_user", $id_user);
-            $stmt->bindParam(":firstname", $firstname_user);
+            $stmt->bindParam(":firstname_user", $firstname_user);
             $stmt->bindParam(":name_user", $name_user);
             $stmt->bindParam(":email_user", $email_user);
             $stmt->bindParam(":password_user", $password_user);
             $stmt->bindParam(":role_user", $role_user);
             $stmt->execute();
-        }
-        catch (PDOException $e) {
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
             echo "error : ", $e->getMessage();
+            return null;
         }
     }
 }

@@ -4,7 +4,6 @@
 ? https://mariadb.com/resources/blog/developer-quickstart-php-data-objects-and-mariadb/
 
 */
-
 /**
  * class use to connect the php to the database
  */
@@ -68,3 +67,4 @@ class BDD
     public function __wakeup(){}
 
 }
+

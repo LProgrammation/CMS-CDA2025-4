@@ -43,5 +43,4 @@ $router->routeMap("GET", "/error", "error") ;
 
 // call router for actual $uri
 $router->match($uri) ;
-require_once "../src/view/footer.php";
 
