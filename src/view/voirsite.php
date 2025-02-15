@@ -48,7 +48,6 @@
             }
         ?>
 
-        <a href="/monsite">Mon site</a>
     </div>
 </div>
 

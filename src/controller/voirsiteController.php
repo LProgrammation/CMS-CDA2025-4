@@ -27,6 +27,8 @@
 
 
 class voirsiteController {
+
+
     public function index($routeMap, $uri) {
         require_once "../src/model/BDD.php";
         require_once "../src/model/" . $routeMap[$uri]['name'] . "Model.php";
