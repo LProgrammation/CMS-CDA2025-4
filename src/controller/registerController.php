@@ -1,7 +1,4 @@
-<?php 
-
-
-
+<?php
 class registerController{
     public function index($routeMap, $uri){
 

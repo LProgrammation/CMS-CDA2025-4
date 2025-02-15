@@ -60,7 +60,36 @@ class UserModel
             $stmt->execute();
             return $stmt->rowCount();
         } catch (PDOException $e) {
-            echo "error : ", $e->getMessage();
+            return null;
+        }
+    }
+
+    public function updateUser(string $id, string $firstname, string $lastname, string $email, string $role)
+    {
+        try {
+            $pdo = BDD::getInstance();
+            $stmt = $pdo->prepare("UPDATE user SET role_user=:role, email_user=:email, name_user=:lastname, firstname_user=:firstname WHERE id_user = :id");
+            $stmt->bindParam(":id", $id);
+            $stmt->bindParam(":firstname", $firstname);
+            $stmt->bindParam(":lastname", $lastname);
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":role", $role);
+            $stmt->execute();
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
+    public function deleteUser(string $id)
+    {
+        try {
+            $pdo = BDD::getInstance();
+            $stmt = $pdo->prepare("DELETE FROM user WHERE id_user = :id");
+            $stmt->bindParam(":id", $id);
+            $stmt->execute();
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
             return null;
         }
     }
