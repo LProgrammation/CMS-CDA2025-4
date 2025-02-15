@@ -41,7 +41,7 @@ class Router {
             }
         }
         catch(Exception $e){
-            echo $e ; 
+            echo $e ;
         }
     }
 

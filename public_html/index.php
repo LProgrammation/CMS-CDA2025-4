@@ -10,6 +10,7 @@ session_start();
 // Load .env variable
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
+
 // Get url content for router redirection
 $uri = $_SERVER['REQUEST_URI'] ;
 $uri = parse_url($uri, PHP_URL_PATH);
@@ -27,17 +28,20 @@ if ($cleanUri != $uri) {
 }
 
 // Instanciation
-$router = new Router();
+$router = new router();
 
 // Initialisation of all routes for users
 $router->routeMap("GET", "/home", "home") ;
 
+$router->routeMap("GET", "/page", "page") ;
+$router->routeMap("GET", "/page/new-page", "page", "new-page") ;
+$router->routeMap("GET", "/page/gestion-pages", "page", "gestion-pages") ;
+
 $router->routeMap("GET", "/logs", "logs") ;
 
 $router->routeMap("GET", "/error", "error") ;
-$router->routeMap("GET", "/home/test", "home") ;
-$router->match($uri) ;
-// call router for actual $uri
 
 // call router for actual $uri
+$router->match($uri) ;
+require_once "../src/view/footer.php";
 
