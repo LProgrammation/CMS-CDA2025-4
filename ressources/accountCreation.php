@@ -26,7 +26,7 @@ if(isset($firstname, $lastname, $email, $password, $role)) {
     $userModel = new userModel();
     try {
         $password = password_hash($password, PASSWORD_DEFAULT);
-        $userModel->registerUsers(guidv4(), $firstname, $lastname, $email, $password, $role);
+        $userModel->registerUser(guidv4(), $firstname, $lastname, $email, $password, $role);
     } catch (\Random\RandomException $e) {
         echo $e->getMessage();
     }

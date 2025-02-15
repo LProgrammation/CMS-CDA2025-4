@@ -8,7 +8,7 @@ Class migration2 {
     public function up(PDO $pdo) {
         try {
             $pdo = BDD::getInstance() ;
-            $stmt = $pdo->prepare("CREATE TABLE IF NOT EXISTS Logs (id varchar(48) primary key, id_user varchar(48) , date datetime, action varchar(512))");
+            $stmt = $pdo->prepare("CREATE TABLE IF NOT EXISTS Log (id varchar(48) primary key, id_user varchar(48) , date datetime, action varchar(512))");
             $stmt->execute();
             return true;
         }
@@ -24,7 +24,7 @@ Class migration2 {
     public function down(PDO $pdo) {
         try {
             $pdo = BDD::getInstance() ;
-            $stmt = $pdo->prepare("DROP TABLE IF EXISTS Logs");
+            $stmt = $pdo->prepare("DROP TABLE IF EXISTS Log");
             $stmt->execute();
             return true;
         }

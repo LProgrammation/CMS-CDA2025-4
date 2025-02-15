@@ -1,5 +1,5 @@
 <?php
-Class migration3 {
+Class migration4 {
     /**
      * @param PDO $pdo
      * @return mixed
@@ -8,7 +8,7 @@ Class migration3 {
     {
         try {
             $pdo = BDD::getInstance() ;
-            $stmt = $pdo->prepare("CREATE TABLE IF NOT EXISTS Site (id varchar(36) primary key, id_user varchar(36))");
+            $stmt = $pdo->prepare("CREATE TABLE IF NOT EXISTS Page (id varchar(36) primary key,  id_site varchar(36), title varchar(50), type enum('header', 'footer', 'main'), content text, is_default_page boolean)");
             $stmt->execute();
             return true;
         }
@@ -25,7 +25,7 @@ Class migration3 {
     {
         try {
             $pdo = BDD::getInstance() ;
-            $stmt = $pdo->prepare("DROP TABLE IF EXISTS Site");
+            $stmt = $pdo->prepare("DROP TABLE IF EXISTS Page");
             $stmt->execute();
             return true;
         }
