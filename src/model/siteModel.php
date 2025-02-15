@@ -6,7 +6,7 @@ class siteModel
 {
   public function getSites(){
     $pdo=BDD::getInstance();
-    $requete = "SELECT nom_site, s.id_utilisateur, u.nom_utilisateur AS nom_utilisateur
+    $requete = "SELECT id_site, nom_site, s.id_utilisateur, u.nom_utilisateur AS nom_utilisateur
     FROM sites AS s
     JOIN utilisateur AS u ON s.id_utilisateur = u.id_utilisateur;";
 

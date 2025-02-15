@@ -15,12 +15,18 @@
                         <p class="card-text">
                             <strong>Utilisateur : </strong><?= $liste_site['nom_utilisateur']; ?>
                         </p>
+                        <form method="POST" action="/voirsite">
+                        <input type="hidden" name="site_id" value="<?= $liste_site['id_site']; 
+                        ?>">
+                        <button type="submit" class="btn btn-primary">Voir détails</button>
+                        </form>
                     </div>
                 </div>
             </div>
         <?php endforeach; ?>
     </div>
-</div> 
+</div>
+
 
 
 
