@@ -7,9 +7,6 @@ class Router {
 
     private array $routeMap ;
 
-    public function __construct() {
-        echo "Router class loaded!";
-    }
     /**
      * Generate route map
      * @param string $method
