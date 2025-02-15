@@ -5,6 +5,7 @@ class user_managementController
 
     public function index($routeMap, $uri): void
     {
+        //rajouter le isGranted
         require_once __DIR__ . '/../model/userModel.php';
         $message = ["success", ""];
         $userModel = new userModel();
@@ -17,6 +18,16 @@ class user_managementController
             }
             catch (Exception $e) {
                 $message = ["danger", "Un problème a eu lieu lors de la modification de l'utilisateur"];
+            }
+        }
+
+        if (isset($_POST["submit_suppr"])){
+            try {
+                $result = $userModel->deleteUser($_POST["id_user"]);
+                $result != null ? $message = ["success", "L'Utilisateur a bien été supprimé"] : $message = ["danger", "Un problème a eu lieu lors de la suppression de l'utilisateur"];
+            }
+            catch (Exception $e) {
+                $message = ["danger", "Un problème a eu lieu lors de la suppression de l'utilisateur"];
             }
         }
 

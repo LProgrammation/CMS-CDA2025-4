@@ -17,7 +17,8 @@ class Access {
             return $user_info && $role_check === $user_info[0]['role'];
         }
 
-        return false;
+        header('Location: /error?code=404');
+        exit();
     }
 
     /**
