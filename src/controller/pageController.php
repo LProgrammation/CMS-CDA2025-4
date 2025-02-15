@@ -5,7 +5,9 @@
 class pageController{
     public function index($routeMap, $uri){
         require_once "../src/model/".$routeMap[$uri]['name']."Model.php";
+        require_once "../src/model/logsModel.php";
         $page_model=new pageModel();
+        $logs_model=new LogsModel();
         switch($routeMap[$uri]['target']){
             case 'new-page':
                 $is_there_header=False;
@@ -27,9 +29,6 @@ class pageController{
                 break;
 
             case 'gestion-pages':
-                echo '<pre>';
-                print_r($_GET);
-                echo '</pre>';
                 $tabAllPages=$page_model->getNavbarSite($_GET['id_site']);
                 require_once "../src/view/".$routeMap[$uri]['name']."_gestion.php";
                 break;
@@ -49,13 +48,20 @@ class pageController{
                                     $page_model->updateDefaultPage($_POST['id_site'], $_POST['id_default_page']);
                                 }
                             }
+                            $logs_model->setLogs($_SESSION['id_user'], "Modification des pages du site avec l'id :$id_site");
                             break;
                         case 'create_page':
                             require_once "../src/module/uuid.php";
                             $id_new_page=$page_model->newPage($_POST['id_site'],$_POST['title_page'], $_POST['type_page']??'main',  $_POST['is_default_page']??'0');
+                            if(isset($_POST['is_default_page'])){
+                                $page_model->updateDefaultPage($_POST['id_site'], $id_new_page);
+                            }
+                            $logs_model->setLogs($_SESSION['id_user'], "Création d'une nouvelle page avec l'id :$id_new_page pour le site avec l'id :$id_site");
+
                             break;
                         case 'save_page':
                             $page_model->savePage($_POST['id_site'],$_POST['id_page'],$_POST['content']);
+                            $logs_model->setLogs($_SESSION['id_user'], "Modification de la page avec l'id :".$_POST['id_page']." pour le site avec l'id :$id_site");
                             break;
                     }
                 }
