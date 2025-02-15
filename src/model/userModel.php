@@ -44,7 +44,7 @@ class UserModel
         return false;
     }
 
-    public function registerUsers(string $firstname, string $lastname, string $email, string $password, string $role="utilisateur")
+    public function registerUsers(string $firstname, string $lastname, string $email, string $password, string $role="user")
     {
         try {
             require_once __DIR__ . '/../module/uuid.php';
