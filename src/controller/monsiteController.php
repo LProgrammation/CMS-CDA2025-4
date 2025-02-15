@@ -6,4 +6,30 @@
 
 // faire des logs pour chaque action :  log model et set logs avec id user et action
 
+
+
+class monsiteController {
+    public function index($routeMap, $uri) {
+        require_once "../src/model/BDD.php";
+        require_once "../src/model/" . $routeMap[$uri]['name'] . "Model.php";
+
+        $monsite_model = new monsiteModel();
+        $error = null;
+        $mon_sites = []; 
+
+        if (isset($_SESSION['utilisateur']['id_utilisateur'])) {
+            $id_utilisateur = $_SESSION['utilisateur']['id_utilisateur']; 
+            $mon_sites = $monsite_model->getSitesByUtilisateur($id_utilisateur);
+
+            if (!$mon_sites) {
+                $error = "Aucun site trouvé pour cet utilisateur.";
+            } 
+        } else {
+            $error = "Utilisateur non connecté.";
+        }
+
+        require_once "../src/view/" . $routeMap[$uri]['name'] . ".php";
+    }
+}
+
 ?>

@@ -4,6 +4,18 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once "../src/model/BDD.php" ;  
 require_once "../src/module/router.php";
 session_start();
+
+$_SESSION['utilisateur'] = [
+    'id_utilisateur' => '2',
+    'prenom_utilisateur' => 'wow',
+    'role_utilisateur' => 'user',
+    'nom_utilisateur' => 'michel',
+    'email_utilisateur' => 'wow@test.fr',
+    'password_utilisateur' => 'youhou'
+];
+
+
+
 // Load .env variable
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
@@ -33,6 +45,12 @@ $router->routeMap("GET", "/home", "home") ;
 $router->routeMap("GET", "/error", "error") ; 
 
 $router->routeMap("GET", "/site", "site");
+
+$router->routeMap("GET", "/login", "login");
+
+$router->routeMap("GET", "/register", "register");
+
+$router->routeMap("GET", "/logout", "logout");
 
 $router->routeMap("GET", "/voirsite", "voirsite");
 
