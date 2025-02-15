@@ -12,7 +12,7 @@ Class migration3 {
     {
         try {
             $pdo = BDD::getInstance() ;
-            $stmt = $pdo->prepare("CREATE TABLE IF NOT EXISTS Site (id varchar(36) primary key, id_user varchar(36))");
+            $stmt = $pdo->prepare("CREATE TABLE IF NOT EXISTS site (id_site varchar(36) primary key, id_user varchar(36), foreign key (id_user) references user(id_user))");
             $stmt->execute();
             return true;
         }

@@ -6,8 +6,8 @@ $dotenv->load();
 Use Src\Model\UserModel ;
 
 $options= [
-    "firstname:",
-    "lastname:",
+    "firstname_user:",
+    "name_user:",
     "email:",
     "password:",
     "role:",
@@ -16,18 +16,18 @@ $options= [
 $args = getopt('', $options);
 
 if($args) {
-    $firstname = $args['firstname'];
-    $lastname = $args['lastname'];
-    $email = $args['email'];
-    $password = $args['password'];
-    (isset($args['role'])) ? $role = $args['role'] : $role = "user";
+    $firstname_user = $args['firstname_user'];
+    $name_user = $args['name_user'];
+    $email_user = $args['email_user'];
+    $password_user = $args['password_user'];
+    (isset($args['role_user'])) ? $role_user = $args['role_user'] : $role_user = "user";
 }
 
-if(isset($firstname, $lastname, $email, $password, $role)) {
+if(isset($firstname_user, $name_user, $email_user, $password_user, $role_user)) {
     $userModel = new userModel();
     try {
-        $password = password_hash($password, PASSWORD_DEFAULT);
-        $userModel->registerUser(guidv4(), $firstname, $lastname, $email, $password, $role);
+        $password = password_hash($password_user, PASSWORD_DEFAULT);
+        $userModel->registerUser(guidv4(), $firstname_user, $name_user, $email_user, $password_user, $role_user);
     } catch (\Random\RandomException $e) {
         echo $e->getMessage();
     }

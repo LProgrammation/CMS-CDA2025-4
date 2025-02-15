@@ -1,9 +1,10 @@
 <?php
-require_once("../src/model/userModel.php");
+
 /**
  * Summary of Access
  */
 namespace Src\Module ;
+use \Src\Model\UserModel ;
 class Access {
     /**
      * Check if the user has the specified role.
@@ -13,7 +14,7 @@ class Access {
     public function isGranted(string $role_check = 'user'): bool {
         if ($this->isLogin()) {
             $userModel = new userModel(); // This have to be replace by usersModel class with user informations get in BDD
-            $user_info = $userModel->getUserById($_SESSION['user']['id']);
+            $user_info = $userModel->getUserById($_SESSION['user']['id_user']);
 
             return $user_info && $role_check === $user_info[0]['role'];
         }
@@ -26,6 +27,6 @@ class Access {
      * @return bool
      */
     public function isLogin(): bool {
-        return isset($_SESSION['user']['is_authenticated']);
+        return isset($_SESSION['user']);
     }
 }

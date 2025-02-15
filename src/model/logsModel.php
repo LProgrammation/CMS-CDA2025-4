@@ -1,6 +1,9 @@
 <?php
 namespace Src\Model ;
+use PDO;
+use PDOException;
 class LogsModel{
+
     public function getLogs()
     {
         $pdo=BDD::getInstance();
@@ -8,24 +11,22 @@ class LogsModel{
             SELECT
                 *
             FROM
-                cms_logs";
+               log";
         $pdoStatement=$pdo->query($requete);
-        $tab_logs=$pdoStatement->fetchAll();
-        return $tab_logs;
+        return $pdoStatement->fetchAll();
     }
-    public function getLogsById($id_logs)
+    public function getLogById($id_log)
     {
         $pdo=BDD::getInstance();
         $requete="
             SELECT
                 *
             FROM
-                cms_logs
+                log
             WHERE
-                id_logs=".$id_logs;
+                id_log=".$id_log;
         $pdoStatement=$pdo->query($requete);
-        $tab_logs=$pdoStatement->fetchAll();
-        return $tab_logs;
+        return $pdoStatement->fetchAll();
     }
     public function getLogsByUserId($user_id)
     {
@@ -34,32 +35,30 @@ class LogsModel{
             SELECT
                 *
             FROM
-                cms_logs
+                log
             WHERE
                 id_user=".$user_id;
         $pdoStatement=$pdo->query($requete);
-        $tab_logs=$pdoStatement->fetchAll();
-        return $tab_logs;
+        return $pdoStatement->fetchAll();
     }
-    public function setLogs($user_id, $action)
+    public function setLogs($user_id, $action_log)
     {
         $pdo=BDD::getInstance();
         $requete="
         INSERT INTO
-            cms_logs
+            log
             (
                 id_user,
-                date_logs,
-                action_logs
+                date_loo,
+                action_log
             )
         VALUES
             (
                 ".$user_id.",
                 NOW(),
-                '".$action."'
+                '".$action_log."'
             )
         ";
-        $pdoStatement=$pdo->query($requete);
-        return $pdoStatement;
+        return $pdo->query($requete);
     }
 }

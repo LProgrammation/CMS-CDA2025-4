@@ -12,7 +12,7 @@ Class migration2 {
     public function up(PDO $pdo): bool {
         try {
             $pdo = BDD::getInstance() ;
-            $stmt = $pdo->prepare("CREATE TABLE IF NOT EXISTS Log (id varchar(48) primary key, id_user varchar(48) , date datetime, action varchar(512))");
+            $stmt = $pdo->prepare("CREATE TABLE IF NOT EXISTS Log (id_log varchar(48) primary key, id_user varchar(48) , date_log datetime, action_log varchar(512), foreign key (id_user) references user(id_user))");
             $stmt->execute();
             return true;
         }

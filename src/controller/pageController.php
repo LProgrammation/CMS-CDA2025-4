@@ -2,10 +2,16 @@
 /**
  * Summary of homeController
  */
+namespace Src\Controller ;
+use \Src\Model\PageModel ;
+use \Src\Model\LogsModel ;
+use \Src\Module\Access ;
 class pageController{
     public function index($routeMap, $uri){
-        require_once "../src/model/".$routeMap[$uri]['name']."Model.php";
-        require_once "../src/model/logsModel.php";
+
+        $accessModule = new Access();
+        $accessModule->isGranted();
+
         $page_model=new pageModel();
         $logs_model=new LogsModel();
         switch($routeMap[$uri]['target']){

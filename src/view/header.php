@@ -44,9 +44,12 @@
             <nav class="d-flex justify-content-around container">
                 <ul>
                     <a href="/home" class="p-2">Accueil</a>
+                    <?php /** @var TYPE_NAME $access */
+                    if($access->isGranted("admin")) :?>
                     <a href="/logs" class="p-2">logs</a>
-                    <a href="/site" class="p-2">site</a>
                     <a href="/page" class="p-2">page</a>
+                    <?php endif;?>
+                    <a href="/site" class="p-2">site</a>
                     <?php
                     if (isset($_SESSION['user'])) {
                         ?>

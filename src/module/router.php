@@ -3,6 +3,7 @@
  * Router class
  */
 namespace Src\Module ;
+use \Src\Module\Access ;
 class Router {
 
     private array $routeMap ;
@@ -58,6 +59,7 @@ class Router {
 
         $controller =  "\\Src\\Controller\\".$routeMap[$uri]['name']."Controller" ;
         $controller = new $controller() ;
+        $access = new Access() ;
 
         require_once "../src/view/header.php";
         ?>

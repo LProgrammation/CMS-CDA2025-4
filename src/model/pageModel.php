@@ -1,4 +1,7 @@
 <?php
+namespace Src\Model ;
+use Random\RandomException;
+use \Src\Module\Uuid ;
 class pageModel{
     public function getAllPagesBySite($id_site)
     {
@@ -7,7 +10,7 @@ class pageModel{
             SELECT
                 *
             FROM
-                cms_page
+                page
             WHERE
                 id_site='".$id_site."'";
         $pdoStatement=$pdo->query($requete);
@@ -20,7 +23,7 @@ class pageModel{
             SELECT
                 *
             FROM
-                cms_page
+                page
             WHERE
                 id_site='".$id_site."' AND
                 type_page!='header' AND
@@ -35,12 +38,12 @@ class pageModel{
             SELECT
                 content_page
             FROM
-                cms_page
+                page
             WHERE
-                id_page='".$id_page."'";
+                id='".$id_page."'";
         $pdoStatement=$pdo->query($requete);
         $content_page=$pdoStatement->fetch();
-        return $content_page['content_page'];
+        return $content_page['content'];
     }
     public function getTitlePage($id_page)
     {
@@ -49,12 +52,13 @@ class pageModel{
             SELECT
                 title_page
             FROM
-                cms_page
+                page
             WHERE
-                id_page='".$id_page."'";
+                id='".$id_page."'";
         $pdoStatement=$pdo->query($requete);
         $content_page=$pdoStatement->fetch();
-        return $content_page['title_page'];
+        $content  = $content_page['title'];
+        return $content;
     }
     public function getLogsByUserId($user_id)
     {
@@ -63,19 +67,23 @@ class pageModel{
             SELECT
                 *
             FROM
-                cms_logs
+                log
             WHERE
                 id_user=".$user_id;
         $pdoStatement=$pdo->query($requete);
         $tab_logs=$pdoStatement->fetchAll();
         return $tab_logs;
     }
+
+    /**
+     * @throws RandomException
+     */
     public function newPage($id_site, $title_page, $type_page, $is_default_page)
     {
         $pdo=BDD::getInstance();
         $requete="
         INSERT INTO
-            cms_page
+            page
             (
                 id_page,
                 id_site,
@@ -93,7 +101,8 @@ class pageModel{
             )
         ";
         $pdoStatement=$pdo->prepare($requete);
-        $id_page=guidv4();
+        $UuidModel = new Uuid();
+        $id_page=$UuidModel->guidv4();
         $pdoStatement->execute([
             ':uuid'=>$id_page,
             ':id_site'=>$id_site,
@@ -108,7 +117,7 @@ class pageModel{
         $pdo=BDD::getInstance();
         $requete="
         UPDATE
-            cms_page
+            page
         SET
             content_page=:content_page
         WHERE
@@ -127,7 +136,7 @@ class pageModel{
         $pdo=BDD::getInstance();
         $requete="
         UPDATE
-            cms_page
+            page
         SET
             title_page=:title_page
         WHERE
@@ -143,7 +152,7 @@ class pageModel{
     {
         $pdo=BDD::getInstance();
         $requete="
-        UPDATE cms_page
+        UPDATE page
         SET is_default_page = CASE
             WHEN id_page = :id_page THEN 1
             ELSE 0

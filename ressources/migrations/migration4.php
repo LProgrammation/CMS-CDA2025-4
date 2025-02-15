@@ -12,7 +12,7 @@ Class migration4 {
     {
         try {
             $pdo = BDD::getInstance() ;
-            $stmt = $pdo->prepare("CREATE TABLE IF NOT EXISTS Page (id varchar(36) primary key,  id_site varchar(36), title varchar(50), type enum('header', 'footer', 'main'), content text, is_default_page boolean)");
+            $stmt = $pdo->prepare("CREATE TABLE IF NOT EXISTS Page (id_page varchar(36) primary key,  id_site varchar(36), title_page varchar(50), type_page enum('header', 'footer', 'main'), content_page text, is_default_page boolean, foreign key (id_site) references site (id_site))");
             $stmt->execute();
             return true;
         }
