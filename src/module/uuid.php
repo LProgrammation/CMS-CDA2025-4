@@ -1,5 +1,5 @@
 <?php
-
+namespace Src\Module ;
 use Random\RandomException;
 
 /**

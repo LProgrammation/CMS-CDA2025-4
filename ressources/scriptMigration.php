@@ -1,12 +1,14 @@
 <?php
 //  Insert migration script here
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once('../src/model/BDD.php');
-require_once('../src/model/migrationModel.php');
-require_once('./migrationFunction.php');
+require_once __DIR__ . '/../src/module/autoloader.php';
+use \Src\Model\migrationModel ;
+use \ressources\migrationFunction ;
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
-$migrationModel = new MigrationModel();
+
+
+$migrationModel = new migrationModel();
 $options = [
     "mode:",
     "number:",
@@ -16,7 +18,7 @@ $arguments = getopt("", $options);
 
 
 if(!isset($arguments["mode"])){
-    echo "L'argument mode est obligatoire (--mode)" ;
+    echo "Mode required (--mode=prev/next/migrate/reset/history/locallist)" ;
     die();
 }
 
@@ -34,7 +36,7 @@ $migrationFunction->migrationModel = $migrationModel;
 switch ($arguments['mode']) {
 
     case 'locallist' :
-        echo "Voici la liste des migrations disponible :  \n";
+        echo "Migration available list :  \n";
         foreach($migrationsLocalList as $migration){
             echo " - ", pathinfo($migration, PATHINFO_FILENAME),"\n";
         };

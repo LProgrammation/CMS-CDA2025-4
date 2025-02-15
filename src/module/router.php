@@ -2,10 +2,14 @@
 /**
  * Router class
  */
-class router {
+namespace Src\Module ;
+class Router {
 
     private array $routeMap ;
 
+    public function __construct() {
+        echo "Router class loaded!";
+    }
     /**
      * Generate route map
      * @param string $method
@@ -53,9 +57,9 @@ class router {
      */
     public function pageGeneration(array $routeMap, string $uri): void
     {
-        
-        require "../src/controller/".$routeMap[$uri]['name']."Controller.php" ;
-        $controller = $routeMap[$uri]["name"]."Controller";
+
+
+        $controller =  "\\Src\\Controller\\".$routeMap[$uri]['name']."Controller" ;
         $controller = new $controller() ;
 
         require_once "../src/view/header.php";

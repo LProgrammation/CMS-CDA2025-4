@@ -1,5 +1,7 @@
 <?php
-
+namespace Src\Model ;
+use PDO;
+use PDOException;
 Class migrationModel {
     /**
      * @return array
@@ -13,19 +15,20 @@ Class migrationModel {
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function getLastMigration()
+    public function getLastMigration(): array
     {
         $pdo = BDD::getInstance() ;
         $stmt = $pdo->query("SELECT * FROM Migrations ORDER BY id DESC LIMIT 1");
         return $stmt->fetchAll();
 
     }
+
     /**
-     * @return mixed
+     * @return array
      */
-    public function getPrevMigration(): mixed
+    public function getPrevMigration(): array
     {
         $pdo = BDD::getInstance() ;
         $stmt = $pdo->query("SELECT * FROM Migrations ORDER BY id DESC LIMIT 1 OFFSET 1");

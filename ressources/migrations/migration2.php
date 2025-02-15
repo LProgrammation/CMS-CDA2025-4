@@ -1,11 +1,15 @@
 <?php
 
+namespace ressources\migrations;
+use Src\Model\BDD ;
+use PDO ;
+use PDOException;
 Class migration2 {
     /**
      * @param PDO $pdo
-     * @return mixed
+     * @return bool
      */
-    public function up(PDO $pdo) {
+    public function up(PDO $pdo): bool {
         try {
             $pdo = BDD::getInstance() ;
             $stmt = $pdo->prepare("CREATE TABLE IF NOT EXISTS Log (id varchar(48) primary key, id_user varchar(48) , date datetime, action varchar(512))");
@@ -20,8 +24,9 @@ Class migration2 {
 
     /**
      * @param PDO $pdo
+     * @return bool
      */
-    public function down(PDO $pdo) {
+    public function down(PDO $pdo): bool {
         try {
             $pdo = BDD::getInstance() ;
             $stmt = $pdo->prepare("DROP TABLE IF EXISTS Log");

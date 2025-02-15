@@ -8,6 +8,10 @@
 /**
  * class use to connect the php to the database
  */
+namespace Src\Model ;
+use PDO;
+use PDOException;
+
 class BDD
 {
 

@@ -3,6 +3,7 @@ require_once("../src/model/userModel.php");
 /**
  * Summary of Access
  */
+namespace Src\Module ;
 class Access {
     /**
      * Check if the user has the specified role.

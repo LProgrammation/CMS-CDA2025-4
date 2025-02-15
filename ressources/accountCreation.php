@@ -1,9 +1,10 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../src/module/autoloader.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
-require '../src/model/userModel.php';
-require '../src/module/uuid.php';
+Use Src\Model\UserModel ;
+
 $options= [
     "firstname:",
     "lastname:",
@@ -19,7 +20,7 @@ if($args) {
     $lastname = $args['lastname'];
     $email = $args['email'];
     $password = $args['password'];
-    (isset($args['role'])) ? $role = $args['role'] : $role = "utilisateur";
+    (isset($args['role'])) ? $role = $args['role'] : $role = "user";
 }
 
 if(isset($firstname, $lastname, $email, $password, $role)) {

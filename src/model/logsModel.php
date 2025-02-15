@@ -1,4 +1,5 @@
 <?php
+namespace Src\Model ;
 class LogsModel{
     public function getLogs(): mixed
     {

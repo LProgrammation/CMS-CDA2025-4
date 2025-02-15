@@ -1,10 +1,14 @@
 <?php
+namespace ressources\migrations;
+use Src\Model\BDD ;
+use PDO ;
+use PDOException;
 Class migration4 {
     /**
      * @param PDO $pdo
-     * @return mixed
+     * @return bool
      */
-    public function up(PDO $pdo)
+    public function up(PDO $pdo): bool
     {
         try {
             $pdo = BDD::getInstance() ;
@@ -20,8 +24,9 @@ Class migration4 {
 
     /**
      * @param PDO $pdo
+     * @return bool
      */
-    public function down(PDO $pdo)
+    public function down(PDO $pdo): bool
     {
         try {
             $pdo = BDD::getInstance() ;

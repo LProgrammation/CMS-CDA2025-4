@@ -1,15 +1,29 @@
 <?php
-
+namespace ressources ;
+use \Src\Model\BDD ;
 Class migrationFunction{
+    /**
+     * @var string|null
+     */
     public string|null $lastMigration;
+    /**
+     * @var array
+     */
     public array $migrationsLocalList;
-
-    public migrationModel $migrationModel ;
+    /**
+     * @var \Src\Model\migrationModel
+     */
+    public \Src\Model\migrationModel $migrationModel ;
+    /**
+     * @var string
+     */
     public string $date ;
 
 
-
-    public function migrate(){
+    /**
+     * @return bool
+     */
+    public function migrate():bool{
         $pattern = '/^migration(\d+)$/';
         (!$this->lastMigration) ? $currentMigrationNumber = 0 : $currentMigrationNumber = (int)substr($this->lastMigration, 9);
         $migrationToExecute= [];
@@ -34,7 +48,8 @@ Class migrationFunction{
         foreach($migrationToExecute as $migration){
             require_once ('./migrations/' . $migration.'.php');
             $migrationClass = pathinfo($migration, PATHINFO_FILENAME);
-            $migrationExecution = New $migrationClass();
+            $migrationExecution = "\\ressources\\migrations\\" . $migrationClass;
+            $migrationExecution = New $migrationExecution();
             $exec = $migrationExecution->up(BDD::getInstance());
             if(!$exec){
                 echo 'error' ;
@@ -47,7 +62,10 @@ Class migrationFunction{
         return true ;
     }
 
-    public function reset(){
+    /**
+     * @return bool
+     */
+    public function reset():bool{
         if(!$this->lastMigration){
             echo "Empty database, reset not necessary" ;
             return false ;
@@ -73,7 +91,8 @@ Class migrationFunction{
         foreach($migrationToExecute as $migration){
             require_once ('./migrations/' . $migration.'.php');
             $migrationClass = pathinfo($migration, PATHINFO_FILENAME);
-            $migrationExecution = New $migrationClass();
+            $migrationExecution = "\\ressources\\migrations\\" . $migrationClass;
+            $migrationExecution = New $migrationExecution();
             $exec = $migrationExecution->down(BDD::getInstance());
             if(!$exec){
                 echo "error";
@@ -83,7 +102,12 @@ Class migrationFunction{
         }
         return true ;
     }
-    public function next(){
+
+    /**
+     * @return bool
+     */
+    public function next(): bool
+    {
         echo "Next update : ". $this->lastMigration ."\n";
         echo "All migration available : \n" ;
         foreach($this->migrationsLocalList as $migration){
@@ -103,8 +127,8 @@ Class migrationFunction{
                 if ($num > $currentMigrationNumber) {
                     require_once ('./migrations/' . $matches[0] . '.php');
                     echo "This update will be executed : $matches[0]\n";
-                    $migrationExecution = New $matches[0]();
-
+                    $migrationExecution = "\\ressources\\migrations\\" . $matches[0];
+                    $migrationExecution = New $migrationExecution();
                     $exec = $migrationExecution->up(BDD::getInstance());
                     if (!$exec) {
                         echo "error";
@@ -124,13 +148,19 @@ Class migrationFunction{
         echo "Empty migrations list after this migration : ", $this->lastMigration ;
         return false ;
     }
+
+    /**
+     * @return false|void
+     */
     public function prev(){
         if (!$this->lastMigration){
             echo "The migrations history is empty, please make a migration(s) before use previous mode" ;
             return false ;
         }
         require_once ('./migrations/' . $this->lastMigration. '.php');
-        $migrationExecution = New $this->lastMigration();
+
+        $migrationExecution = "\\ressources\\migrations\\" . $this->lastMigration;
+        $migrationExecution = New $migrationExecution();
         $exec = $migrationExecution->down(BDD::getInstance());
         if(!$exec){
             echo "error";

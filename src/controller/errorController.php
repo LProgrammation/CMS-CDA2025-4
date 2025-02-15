@@ -2,6 +2,7 @@
 /**
  * Summary of errorController
  */
+namespace Src\Controller;
 class errorController{
 
     /**

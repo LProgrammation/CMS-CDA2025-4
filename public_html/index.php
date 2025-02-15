@@ -1,13 +1,15 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once "../src/model/BDD.php" ;
-require_once "../src/module/router.php";
+require_once __DIR__ . '/../src/module/autoloader.php';
+
+Use \Src\Model\BDD ;
+Use \Src\Module\Router ;
+
 session_start();
 // Load .env variable
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
-
 // Get url content for router redirection
 $uri = $_SERVER['REQUEST_URI'] ;
 $uri = parse_url($uri, PHP_URL_PATH);
@@ -25,7 +27,7 @@ if ($cleanUri != $uri) {
 }
 
 // Instanciation
-$router = new router();
+$router = new Router();
 
 // Initialisation of all routes for users
 $router->routeMap("GET", "/home", "home") ;
@@ -33,6 +35,7 @@ $router->routeMap("GET", "/home", "home") ;
 $router->routeMap("GET", "/logs", "logs") ;
 
 $router->routeMap("GET", "/error", "error") ;
+$router->routeMap("GET", "/home/test", "home") ;
 $router->match($uri) ;
 // call router for actual $uri
 

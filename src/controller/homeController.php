@@ -1,5 +1,5 @@
 <?php
-
+namespace Src\Controller;
 
 /**
  * Summary of homeController

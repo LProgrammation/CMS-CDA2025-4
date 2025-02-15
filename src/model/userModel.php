@@ -1,11 +1,16 @@
 <?php
+namespace Src\Model ;
+use PDO;
+use PDOException;
 Class UserModel{
 
-
+    /**
+     * @return false|array
+     */
     public function getUsers(): false|array
     {
         $pdo = BDD::getInstance() ;
-        $stmt = $pdo->prepare("SELECT * FROM User");
+        $stmt = $pdo->prepare("SELECT * FROM user");
         $stmt->execute();
         $res = $stmt->fetchall(PDO::FETCH_ASSOC);
         if ($res) {
@@ -15,11 +20,15 @@ Class UserModel{
         return false;
     }
 
+    /**
+     * @param $email
+     * @return false|array
+     */
     public function getUserByEmail($email): false|array
     {
 
         $pdo = BDD::getInstance();
-        $stmt = $pdo->prepare("SELECT * FROM User WHERE email=:email");
+        $stmt = $pdo->prepare("SELECT * FROM user WHERE email=:email");
         $stmt->bindParam(":email",$email);
         $stmt->execute();
         $res = $stmt->fetchall(PDO::FETCH_ASSOC);
@@ -30,6 +39,10 @@ Class UserModel{
         return false;
     }
 
+    /**
+     * @param $id
+     * @return false|array
+     */
     public function getUserById($id): false|array
     {
 
@@ -45,7 +58,16 @@ Class UserModel{
         return false;
     }
 
-    public function registerUsers(string $id, string $firstname, string $lastname, string $email, string $password, string $role): void
+    /**
+     * @param string $id
+     * @param string $firstname
+     * @param string $lastname
+     * @param string $email
+     * @param string $password
+     * @param string $role
+     * @return void
+     */
+    public function registerUser(string $id, string $firstname, string $lastname, string $email, string $password, string $role): void
     {
         try {
 

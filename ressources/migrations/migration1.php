@@ -1,5 +1,8 @@
 <?php
-
+namespace ressources\migrations;
+use Src\Model\BDD ;
+use PDO ;
+use PDOException;
 Class migration1 {
     public function up(PDO $pdo) {
         try {
