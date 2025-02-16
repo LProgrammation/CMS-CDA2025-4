@@ -4,7 +4,6 @@ session_start();
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once "../src/model/BDD.php" ;
 require_once "../src/module/router.php";
-session_start();
 // Load .env variable
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();

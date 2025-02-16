@@ -1,5 +1,4 @@
 new DataTable('#datatable-logs');
-console.log('Hello from style.js');
 document.addEventListener("DOMContentLoaded", function () {
     // Sélectionne toutes les checkboxes avec la classe spécifique
     let checkboxes = document.querySelectorAll(".checkbox-is-default-page");

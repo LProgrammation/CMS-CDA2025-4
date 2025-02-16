@@ -19,13 +19,13 @@ if(!isset($arguments["mode"])){
     die();
 }
 $migrationsLogs = $migrationModel->getMigrations();
-$lastMigration = $migrationModel
+$lastMigration = $migrationModel;
 switch ($arguments['mode']) {
 
     case 'localList' :
         var_dump(scandir("./migrations/"));
         break;
-    case 'history': 
+    case 'history':
         var_dump($migrationsLogs);
         break;
     case 'next':

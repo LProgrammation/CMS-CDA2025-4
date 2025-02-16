@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 
@@ -37,7 +37,7 @@ class registerController{
 
                 if ($user) {
                     $message = 'Cet email est déjà utilisé';
-                } elseif (!preg_match('/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!.@;:&$%^*-]).{8,}$/', $password)) { // Vérification si le mot de passe est fort
+                } elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $password)) { // Vérification si le mot de passe est fort
                     $message = "Mot de passe invalide. Assurez-vous qu'il contient au moins 8 caractères, une majuscule, un chiffre et un caractère spécial.";
                 } else {
                     // Création de l'utilisateur
