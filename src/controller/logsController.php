@@ -3,7 +3,6 @@ class LogsController
 {
     public function index($routeMap, $uri): void
     {
-        require_once "../src/model/BDD.php";
         require_once "../src/model/" . $routeMap[$uri]['name'] . "Model.php";
         $logs_model=new LogsModel();
         $tab_logs=$logs_model->getLogs();

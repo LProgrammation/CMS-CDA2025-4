@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once "../src/model/BDD.php" ;
 require_once "../src/module/router.php";
@@ -32,6 +33,10 @@ $router->routeMap("GET", "/home", "home") ;
 
 $router->routeMap("GET", "/error", "error");
 
+$router->routeMap("GET", "/page", "page") ;
+$router->routeMap("GET", "/page/new-page", "page", "new-page") ;
+$router->routeMap("GET", "/page/gestion-pages", "page", "gestion-pages") ;
+
 $router->routeMap("GET", "/logs", "logs") ;
 
 $router->routeMap("GET", "/login", "login");
@@ -41,6 +46,6 @@ $router->routeMap("GET", "/register", "register");
 $router->routeMap("GET", "/logout", "logout");
 
 
-// call router for actual $uri 
-$router->match($uri) ; 
+// call router for actual $uri
+$router->match($uri) ;
 

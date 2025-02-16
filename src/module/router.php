@@ -19,7 +19,7 @@ class router {
         $this->routeMap[$uri]['method'] = $method;
         $this->routeMap[$uri]['url'] = $uri;
         $this->routeMap[$uri]['target'] = $target;
-        
+
     }
 
     /**
@@ -39,7 +39,7 @@ class router {
             }
         }
         catch(Exception $e){
-            echo $e ; 
+            echo $e ;
         }
     }
 
@@ -50,19 +50,15 @@ class router {
      * @param string $uri
      * @return void
      */
-    public function pageGeneration(array $routeMap, string $uri): void
-    {
-        
+    public function pageGeneration(array $routeMap, string $uri){
+
         require "../src/controller/".$routeMap[$uri]['name']."Controller.php" ;
         $controller = $routeMap[$uri]["name"]."Controller";
         $controller = new $controller() ;
-
         require_once "../src/view/header.php";
         ?>
         <?php $controller->index($routeMap, $uri); ?>
         <?php
         require_once "../src/view/footer.php";
-
-        
     }
 };
