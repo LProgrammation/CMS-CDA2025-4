@@ -20,8 +20,30 @@ class monsiteModel {
     }
 
     public function deleteLeSite($site_id) {
-
+        $pdo = BDD::getInstance();
+    
+        try {
+            $pdo->beginTransaction();
+    
+            $query1 = "DELETE FROM page WHERE id_site = :site_id";
+            $stmt1 = $pdo->prepare($query1);
+            $stmt1->bindParam(':site_id', $site_id, PDO::PARAM_STR);
+            $stmt1->execute();
+    
+            $query2 = "DELETE FROM sites WHERE id_site = :site_id";
+            $stmt2 = $pdo->prepare($query2);
+            $stmt2->bindParam(':site_id', $site_id, PDO::PARAM_STR);
+            $stmt2->execute();
+    
+            $pdo->commit();
+    
+            return true; 
+        } catch (Exception $e) {
+            $pdo->rollBack(); 
+            return false;
+        }
     }
+    
 }
 
 ?>
