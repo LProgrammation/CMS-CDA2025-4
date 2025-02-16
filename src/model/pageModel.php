@@ -146,6 +146,7 @@ class pageModel{
             ':id_site'=>$id_site,
             ':id_page'=>$id_page
         ]);
+
     }
     public function updateTitlePage($id_site, $id_page, $title_page='')
     {

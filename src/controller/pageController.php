@@ -38,14 +38,21 @@ class pageController{
                 break;
 
             case 'delete-page':
-
                 $page=$page_model->getPageByID($_GET['id_page']);
                 require_once "../src/view/".$routeMap[$uri]['name']."_delete.php";
                 break;
 
             case null:
+                if(isset($_POST['id_site'])){
+                    $id_site = $_POST['id_site']??null ;
+                }
+                else{
+                    $page = $page_model->getPageByID($_GET['id_page']) ;
+                    $id_site = $page['id_site'];
+
+                }
                 $id_new_page=null;
-                $id_site=$_POST['id_site']??null;
+
                 if(isset($_POST['name_form'])){
                     switch($_POST['name_form']){
                         case 'edit_gestion_form':
@@ -62,7 +69,7 @@ class pageController{
                             break;
                         case 'create_page':
                             require_once "../src/module/uuid.php";
-                            ($_POST['is_default_page']) ? $_POST['is_default_page']=1 : $_POST['is_default_page']=0;
+
                             $id_new_page=$page_model->newPage($_POST['id_site'],$_POST['title_page'], $_POST['type_page']??'main',  $_POST['is_default_page']??'0');
                             if(isset($_POST['is_default_page'])){
                                 $page_model->updateDefaultPage($_POST['id_site'], $id_new_page);
@@ -84,13 +91,17 @@ class pageController{
                             break;
                     }
                 }
-                $tabNavbarSite=$page_model->getNavbarSite($_POST['id_site']??null);
+
+
                 $id_default_page='';
+                $tabNavbarSite=$page_model->getNavbarSite($id_site);
                 foreach($tabNavbarSite as $key=>$value){
-                    if($value['is_default_page']==null){
+                    if($value['is_default_page']==1){
+
                         $id_default_page=$value['id_page'];
                     }
                 }
+
                 $content_page=$page_model->getContentPage($id_new_page??$_GET['id_page']??$id_default_page??$tabNavbarSite[0]['id_page']);
                 $title_page=$page_model->getTitlePage($id_new_page??$_GET['id_page']??$id_default_page??$tabNavbarSite[0]['id_page']);
                 $id_page=$id_new_page??$_GET['id_page']??$id_default_page??$tabNavbarSite[0]['id_page'];

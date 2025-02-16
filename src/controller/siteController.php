@@ -4,14 +4,20 @@ namespace Src\Controller;
 use  Src\Model\siteModel;
 use Src\Model\monsiteModel;
 use Src\Model\voirsiteModel;
+use Src\Model\LogsModel;
+use Src\Module\Uuid;
+
 class siteController{
     public function index($routeMap, $uri)
     {
         $sites_model=new siteModel();
-        $mes_sites_model=new monsiteModel();
+        $logs_model=new LogsModel();
+        $Uuid = new Uuid()
+;         $mes_sites_model=new monsiteModel();
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if(isset($_POST['site_name']) && $_POST['site_name'] !== ''){
                 $mes_sites_model->createLeSite($_POST['site_name']);
+                $logs_model->setLogs($Uuid->guidV4(), $_SESSION['user']['id_user'], "ajout du site ".$_POST['site_name']." par l'utilisateur ".$_SESSION['user']['name_user']."");
                 header('Location:/sites/mysites');
                 exit();
             }
@@ -32,6 +38,9 @@ class siteController{
             case 'my-sites' :
                 if(isset($_POST['submit_delete'])) {
                     $mes_sites_model->deleteLeSite($_POST['id_site']);
+
+                    $logs_model->setLogs($Uuid->guidV4(), $_SESSION['user']['id_user'], "suppression du site ".$_POST['site_name']." par l'utilisateur ".$_SESSION['user']['name_user']." ");
+
                 }
 
                 $error = null;

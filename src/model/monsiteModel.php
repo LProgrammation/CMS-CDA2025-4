@@ -76,6 +76,30 @@ class monsiteModel {
             return false;
         }
     }
+
+    public function changeUserSiteByAdmin($id_user){
+        $pdo = BDD::getInstance();
+
+        try {
+            $pdo->beginTransaction();
+
+            $query1 = "update site set id_user = :id_new_user where id_user = :id_user";
+            $stmt1 = $pdo->prepare($query1);
+            $Uuid = new Uuid();
+            $UuidGen = $Uuid->guidv4();
+            $stmt1->bindParam(':id_new_user', $_SESSION['user']['id_user']);
+            $stmt1->bindParam(':id_user', $id_user);
+            $stmt1->execute();
+
+
+            $pdo->commit();
+
+            return true;
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            return false;
+        }
+    }
     
 }
 

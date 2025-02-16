@@ -8,7 +8,7 @@ class LogsController
     public function index($routeMap, $uri): void
     {
         $accessModule = new Access();
-        if(!$accessModule->isGranted()){
+        if(!$accessModule->isGranted('admin')){
             header("location: /error?code=404");
             exit();
         }

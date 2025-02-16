@@ -2,7 +2,7 @@
     <div>
         <h1>Gestion des utilisateurs</h1>
     </div>
-    <div class="text-<?= $message[0] ?>"><?= $message[1] ?></div>
+    <div class="text-<?php echo $message[0] ?>"><?php echo $message[1] ?></div>
     <div>
         <table id="user_management-datatable" class="table table-striped">
             <thead>
@@ -22,18 +22,18 @@
 
             ?>
             <tr>
-                <th><?= $user["id_user"] ?></th>
-                <td><?= $user["name_user"] ?></td>
-                <td><?= $user["firstname_user"] ?></td>
-                <td><?= $user["email_user"] ?></td>
-                <td><?= $user["role_user"] ?></td>
+                <th><?php echo $user["id_user"] ?></th>
+                <td><?php echo $user["name_user"] ?></td>
+                <td><?php echo $user["firstname_user"] ?></td>
+                <td><?php echo $user["email_user"] ?></td>
+                <td><?php echo $user["role_user"] ?></td>
                 <td>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modification_modal_<?= $compteur ?>">Modifier</button>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#suppression_modal_<?= $compteur ?>">Supprimer</button>
-                    <div class="modal fade" id="modification_modal_<?= $compteur ?>" tabindex="-1" aria-labelledby="Modale de modification" aria-hidden="true">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modification_modal_<?php echo $compteur ?>">Modifier</button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#suppression_modal_<?php echo $compteur ?>">Supprimer</button>
+                    <div class="modal fade" id="modification_modal_<?php echo $compteur ?>" tabindex="-1" aria-labelledby="Modale de modification" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <form class="modal-content" action="" method="post">
-                                <input type="hidden" value="<?= $user["id_user"] ?>" name="id_user">
+                                <input type="hidden" value="<?php echo $user["id_user"] ?>" name="id_user">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="Modal_modif_label">Modification</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
@@ -41,15 +41,15 @@
                                 <div class="modal-body">
                                         <div class="mb-3">
                                             <label for="email_user" class="col-form-label">Email :</label>
-                                            <input type="text" class="form-control" id="email_user" name="email_user" value="<?= $user["email_user"] ?>" required>
+                                            <input type="text" class="form-control" id="email_user" name="email_user" value="<?php echo $user["email_user"] ?>" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="name_user" class="col-form-label">Nom :</label>
-                                            <input type="text" class="form-control" id="name_user" name="name_user" value="<?= $user["name_user"] ?>" required>
+                                            <input type="text" class="form-control" id="name_user" name="name_user" value="<?php echo $user["name_user"] ?>" required>
                                         </div>
                                         <div class=" mb-3">
                                             <label for="firstname_user" class="col-form-label">Prénom :</label>
-                                            <input type="text" class="form-control" id="firstname_user" name="firstname_user" value="<?= $user["firstname_user"] ?>" required>
+                                            <input type="text" class="form-control" id="firstname_user" name="firstname_user" value="<?php echo $user["firstname_user"] ?>" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="role_user" class="col-form-label">Rôle :</label>
@@ -68,10 +68,10 @@
                         </div>
                     </div>
 
-                    <div class="modal fade" id="suppression_modal_<?= $compteur ?>" tabindex="-1" aria-labelledby="Modale de suppression" aria-hidden="true">
+                    <div class="modal fade" id="suppression_modal_<?php echo $compteur ?>" tabindex="-1" aria-labelledby="Modale de suppression" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <form class="modal-content" action="" method="post">
-                                <input type="hidden" value="<?= $user["id_user"] ?>" name="id_user">
+                                <input type="hidden" value="<?php echo $user["id_user"] ?>" name="id_user">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="Modal_modif_label">Modification</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
@@ -82,15 +82,15 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="email_user" class="col-form-label">Email :</label>
-                                        <input type="text" class="form-control" id="email_user" value="<?= $user["email_user"] ?>" disabled>
+                                        <input type="text" class="form-control" id="email_user" value="<?php echo $user["email_user"] ?>" disabled>
                                     </div>
                                     <div class="mb-3">
                                         <label for="name_user" class="col-form-label">Nom :</label>
-                                        <input type="text" class="form-control" id="name_user" value="<?= $user["name_user"] ?>" disabled>
+                                        <input type="text" class="form-control" id="name_user" value="<?php echo $user["name_user"] ?>" disabled>
                                     </div>
                                     <div class=" mb-3">
                                         <label for="firstname_user" class="col-form-label">Prénom :</label>
-                                        <input type="text" class="form-control" id="firstname_user" value="<?= $user["firstname_user"] ?>" disabled>
+                                        <input type="text" class="form-control" id="firstname_user" value="<?php echo $user["firstname_user"] ?>" disabled>
                                     </div>
                                     <div class="mb-3">
                                         <label for="role_user" class="col-form-label">Rôle :</label>

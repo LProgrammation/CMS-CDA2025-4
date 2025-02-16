@@ -8,21 +8,21 @@
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Nom du site : <?= $mon_site['name_site']; ?></h5>
+                        <h5 class="card-title">Nom du site : <?php echo $mon_site['name_site']; ?></h5>
                         <p class="card-text">
-                            <strong>Utilisateur : </strong><?= $mon_site['name_user']; ?>
+                            <strong>Utilisateur : </strong><?php echo $mon_site['name_user']; ?>
                         </p>
                         <form method="POST" action="/sites/see-site">
-                            <input type="hidden" name="id_site" value="<?= $mon_site['id_site'];
+                            <input type="hidden" name="id_site" value="<?php echo $mon_site['id_site'];
                             ?>">
                             <button type="submit" class="btn btn-primary">Voir détails</button>
                         </form>
                         <form method="POST" action="/page/edit-page">
-                            <input type="hidden" name="id_site" value="<?= $mon_site['id_site']; ?>">
+                            <input type="hidden" name="id_site" value="<?php echo $mon_site['id_site']; ?>">
                             <button type="submit" class="btn btn-primary" >Modifier</button>
                         </form>
                         <form method="POST" action="/sites/mysites">
-                            <input type="hidden" name="id_site" value="<?= $mon_site['id_site'];
+                            <input type="hidden" name="id_site" value="<?php echo $mon_site['id_site'];
                             ?>">
                             <button type="submit" class="btn btn-primary" name="submit_delete">Supprimer</button>
                         </form>

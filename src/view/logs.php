@@ -16,11 +16,11 @@
         foreach ($tab_logs as $log) {
             ?>
             <tr>
-                <td><?=$compteur; ?></td>
-                <td><?=$log['id_log']; ?></td>
-                <td><?=$log['id_user']; ?></td>
-                <td><?=$log['date_log']; ?></td>
-                <td><?=$log['action_log']; ?></td>
+                <td><?php echo $compteur; ?></td>
+                <td><?php echo $log['id_log']; ?></td>
+                <td><?php echo $log['id_user']; ?></td>
+                <td><?php echo $log['date_log']; ?></td>
+                <td><?php echo $log['action_log']; ?></td>
             </tr>
             <?php
             $compteur++;

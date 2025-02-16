@@ -9,11 +9,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?php echo $routeMap[$uri]['name']?></title>
-        <link rel="stylesheet" href="../styles/css/bootstrap.css?v=<?=time()?>" />
-        <link rel="stylesheet" href="../styles/css/dataTables.bootstrap5.css?v=<?=time()?>" />
+        <link rel="stylesheet" href="../styles/css/bootstrap.css?v=<?php echo time()?>" />
+        <link rel="stylesheet" href="../styles/css/dataTables.bootstrap5.css?v=<?php echo time()?>" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
         <script src="https://cdn.tiny.cloud/1/fg2643l2js9jwylwdyevizaq0k8wkoo024eihp0fp5r8j14b/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-        <link rel="stylesheet" href="../styles/css/styles.css?v=<?=time()?>" />
+        <link rel="stylesheet" href="../styles/css/styles.css?v=<?php echo time()?>" />
 
         <!-- Script pour TinyCMS -->
         <!-- Place the following <script> and <textarea> tags your HTML's <body> -->

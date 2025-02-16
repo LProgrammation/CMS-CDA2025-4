@@ -11,12 +11,12 @@
             <div class="col-md-4 mb-4"> 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Nom du site : <?= $liste_site['name_site']; ?></h5>
+                        <h5 class="card-title">Nom du site : <?php echo $liste_site['name_site']; ?></h5>
                         <p class="card-text">
-                            <strong>Utilisateur : </strong><?= $liste_site['name_user']; ?>
+                            <strong>Utilisateur : </strong><?php echo $liste_site['name_user']; ?>
                         </p>
                         <form method="POST" action="/sites/see-site">
-                        <input type="hidden" name="id_site" value="<?= $liste_site['id_site'];
+                        <input type="hidden" name="id_site" value="<?php echo $liste_site['id_site'];
                         ?>">
                         <button type="submit" class="btn btn-primary">Voir détails</button>
                         </form>

@@ -5,9 +5,9 @@
             <label class="h2">Connexion :</label>
         </div>
         <div class="mb-3">
-            <div class="text-danger"><?= $message ?></div>
+            <div class="text-danger"><?php echo $message ?></div>
             <label class="form-label">Email :</label>
-            <input type="email" class="form-control" name="email_user" value="<?= $email ?>">
+            <input type="email" class="form-control" name="email_user" value="<?php echo $email ?>">
         </div>
         <div class="mb-3">
             <label class="form-label">Mot de passe :</label>
