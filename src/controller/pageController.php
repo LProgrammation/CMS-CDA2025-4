@@ -94,8 +94,6 @@ class pageController{
                 $content_page=$page_model->getContentPage($id_new_page??$_GET['id_page']??$id_default_page??$tabNavbarSite[0]['id_page']);
                 $title_page=$page_model->getTitlePage($id_new_page??$_GET['id_page']??$id_default_page??$tabNavbarSite[0]['id_page']);
                 $id_page=$id_new_page??$_GET['id_page']??$id_default_page??$tabNavbarSite[0]['id_page'];
-                var_dump($title_page);
-                var_dump($id_page);
                 require_once "../src/view/".$routeMap[$uri]['name'].".php";
                 break;
         }
