@@ -1,31 +1,22 @@
 <?php
+namespace Src\Controller ;
+use Src\Model\pageModel;
+use Src\Model\LogsModel;
+use Src\Module\Uuid;
 /**
  * Summary of homeController
  */
-namespace Src\Controller ;
-use DateTime;
-use \Src\Model\PageModel ;
-use \Src\Model\LogsModel ;
-use \Src\Module\Access ;
-use \Src\Module\Uuid ;
 class pageController{
     public function index($routeMap, $uri){
-        $Uuid = new Uuid() ;
-        $accessModule = new Access();
-        if(!$accessModule->isGranted()){
-            header("location: /error?code=404");
-            exit();
-        }
 
         $page_model=new pageModel();
         $logs_model=new LogsModel();
-        $date = new DateTime();
-
+        $UuidModule = new Uuid();
         switch($routeMap[$uri]['target']){
             case 'new-page':
                 $is_there_header=False;
                 $is_there_footer=False;
-                $tabAllPages=$page_model->getAllPagesBySite($_POST['id_site']??'1');
+                $tabAllPages=$page_model->getAllPagesBySite($_POST['id_site']??null);
                 foreach($tabAllPages as $key=>$value){
                     if($value['type_page']=='header'){
                         $is_there_header=True;
@@ -42,24 +33,19 @@ class pageController{
                 break;
 
             case 'gestion-pages':
-                echo"<pre>";
-                print_r($_POST);
-                echo"</pre>";
                 $tabAllPages=$page_model->getNavbarSite($_GET['id_site']);
                 require_once "../src/view/".$routeMap[$uri]['name']."_gestion.php";
                 break;
 
             case 'delete-page':
-                echo"<pre>";
-                print_r($_POST);
-                echo"</pre>";
+
                 $page=$page_model->getPageByID($_GET['id_page']);
                 require_once "../src/view/".$routeMap[$uri]['name']."_delete.php";
                 break;
 
             case null:
                 $id_new_page=null;
-                $id_site=$_POST['id_site']??'1';
+                $id_site=$_POST['id_site']??null;
                 if(isset($_POST['name_form'])){
                     switch($_POST['name_form']){
                         case 'edit_gestion_form':
@@ -72,38 +58,36 @@ class pageController{
                                     $page_model->updateDefaultPage($_POST['id_site'], $_POST['id_default_page']);
                                 }
                             }
-                            $logs_model->setLogs($Uuid->guidV4(), $_SESSION['user']['id_user'], $date->format("Y-m-d H:i:s"),    "Modification des pages du site avec l'id :$id_site");
+                            $logs_model->setLogs($UuidModule->guidv4(),$_SESSION['user']['id_user'], "Modification des pages du site avec l'id :$id_site");
                             break;
                         case 'create_page':
                             require_once "../src/module/uuid.php";
                             ($_POST['is_default_page']) ? $_POST['is_default_page']=1 : $_POST['is_default_page']=0;
-                            $id_new_page=$page_model->newPage($_POST['id_site'],$_POST['title_page'], $_POST['type_page']??'main',  $_POST['is_default_page']);
+                            $id_new_page=$page_model->newPage($_POST['id_site'],$_POST['title_page'], $_POST['type_page']??'main',  $_POST['is_default_page']??'0');
                             if(isset($_POST['is_default_page'])){
                                 $page_model->updateDefaultPage($_POST['id_site'], $id_new_page);
                             }
-                            $logs_model->setLogs($Uuid->guidV4(), $_SESSION['user']['id_user'], $date->format("Y-m-d H:i:s"), "Création d'une nouvelle page avec l'id :$id_new_page pour le site avec l'id :$id_site");
+                            $logs_model->setLogs($UuidModule->guidv4(), $_SESSION['user']['id_user'], "Création d'une nouvelle page avec l'id :$id_new_page pour le site avec l'id :$id_site");
 
                             break;
 
                         case 'delete_page':
-                            echo"<pre>";
-                            print_r($_SESSION);
-                            echo"</pre>";
+
                             $page=$page_model->getPageByID($_POST['id_page']);
                             $page_model->deletePage($_POST['id_page']);
-                            $logs_model->setLogs($_SESSION['user']['id_user'], "Suppression de la page :'".$page['title_page']."' pour le site avec l'id :$id_site");
+                            $logs_model->setLogs($UuidModule->guidv4(),$_SESSION['user']['id_user'], "Suppression de la page :'".$page['title_page']."' pour le site avec l'id :$id_site");
                             break;
 
                         case 'save_page':
                             $page_model->savePage($_POST['id_site'],$_POST['id_page'],$_POST['content']);
-                            $logs_model->setLogs($Uuid->guidV4(), $_SESSION['user']['id_user'], $date->format("Y-m-d H:i:s"), "Modification de la page avec l'id :".$_POST['id_page']." pour le site avec l'id :$id_site");
+                            $logs_model->setLogs($UuidModule->guidv4(), ['user']['id_user'], "Modification de la page avec l'id :".$_POST['id_page']." pour le site avec l'id :$id_site");
                             break;
                     }
                 }
-                $tabNavbarSite=$page_model->getNavbarSite($_POST['id_site']??'1');
+                $tabNavbarSite=$page_model->getNavbarSite($_POST['id_site']??null);
                 $id_default_page='';
                 foreach($tabNavbarSite as $key=>$value){
-                    if($value['is_default_page']=='1'){
+                    if($value['is_default_page']==null){
                         $id_default_page=$value['id_page'];
                     }
                 }

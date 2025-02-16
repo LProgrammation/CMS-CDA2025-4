@@ -1,4 +1,4 @@
-<form action="/page" method="post">
+<form action="/page/edit-page" method="post">
     <input type="hidden" name="id_page" value="<?=$_GET['id_page']?>">
     <input type="hidden" name="id_site" value="<?=$_GET['id_site']?>">
     <div class="d-flex flex-column">

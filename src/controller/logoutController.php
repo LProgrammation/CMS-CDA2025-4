@@ -14,9 +14,11 @@ class logoutController{
             $_SESSION = array();
             session_destroy();
             header('Location: /');
+            exit();
         }
         if(isset($_POST['submit_back'])){
             header('Location: /');
+            exit();
         }
        
         require_once "../src/view/".$routeMap[$uri]['name'].".php";

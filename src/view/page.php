@@ -1,4 +1,4 @@
-<form action="/voirsite" method="post">
+<form action="/sites/see-site" method="post">
     <input type="hidden" name="id_site" id="id_site" value="<?=$id_site?>">
     <button type="submit" class="btn btn-primary">Voir votre Site</button>
 </form>

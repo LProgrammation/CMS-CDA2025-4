@@ -41,7 +41,7 @@ class LogsModel{
         $pdoStatement=$pdo->query($requete);
         return $pdoStatement->fetchAll();
     }
-    public function setLogs($id_log, $user_id, $date_log, $action_log)
+    public function setLogs($id_log, $user_id, $action_log)
     {
         $pdo=BDD::getInstance();
         $requete='

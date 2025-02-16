@@ -1,4 +1,4 @@
-<form action="/page" method="post" class="d-flex flex-row justify-content-between">
+<form action="/page/edit-page" method="post" class="d-flex flex-row justify-content-between">
     <div>
         <input type="hidden" name="create_page" id="id_site" value="1">
         <input type="hidden" name="id_site" id="id_site" value="<?=$_GET['id_site']??'1'?>">
@@ -28,10 +28,8 @@
         </div>
 
         <div>
-            <label for="is_default_page">Page par défaut ?</label>
+            <label for="is_default_page">Page par défaut :  </label>
             <input type="checkbox" name="is_default_page" id="is_default_page">
-
-
         </div>
     </div>
     <div>
