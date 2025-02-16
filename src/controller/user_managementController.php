@@ -4,7 +4,7 @@ use \Src\Module\Access;
 use \Src\Model\userModel;
 use Src\Model\LogsModel;
 use Src\Module\Uuid;
-use Src\Model\monsiteModel;
+use Src\Model\siteModel;
 class user_managementController
 {
 
@@ -20,7 +20,7 @@ class user_managementController
         $userModel = new userModel();
         $logsModel = new LogsModel();
         $UuidModule = new Uuid();
-        $monSiteModel = new monsiteModel();
+        $siteModel = new siteModel();
 
         if (isset($_POST["submit_modif"])){
             try {
@@ -37,7 +37,7 @@ class user_managementController
         if (isset($_POST["submit_suppr"])){
             try {
                 $result = $userModel->deleteUser($_POST["id_user"]);
-                $monSiteModel->changeUserSiteByAdmin($_POST["id_user"]);
+                $siteModel->changeUserSiteByAdmin($_POST["id_user"]);
                 $result != null ? $message = ["success", "L'Utilisateur a bien été supprimé"] : $message = ["danger", "Un problème a eu lieu lors de la suppression de l'utilisateur"];
                 $logsModel->setLogs($UuidModule->guidv4(), $_SESSION['user']['id_user'], "Modification de l'utilisateur portant l'id : ".$_POST['id_user']."");
 

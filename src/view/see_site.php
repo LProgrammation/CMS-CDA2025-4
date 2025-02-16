@@ -38,7 +38,6 @@
                         }
                     }
                 }
-
                 // Affichage dans l'ordre : header, main, footer
                 echo $header; 
                 echo $main;   

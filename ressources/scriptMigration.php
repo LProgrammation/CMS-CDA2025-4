@@ -26,7 +26,7 @@ $migrationsLogs = $migrationModel->getMigrations();
 
 (isset($migrationModel->getLastMigration()[0]['name'])) ? $lastMigration = $migrationModel->getLastMigration()[0]['name'] : $lastMigration = null;
 
-$migrationsLocalList =  array_diff(scandir('./migrations/'), array('.', '..'));
+$migrationsLocalList =  array_diff(scandir(__DIR__ .'/migrations/'), array('.', '..'));
 $date = date("Y-m-d H:i:s");
 $migrationFunction = New migrationFunction() ;
 $migrationFunction->lastMigration = $lastMigration;

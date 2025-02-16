@@ -29,7 +29,7 @@
 
         <div>
             <label for="is_default_page">Page par défaut :  </label>
-            <input type="checkbox" name="is_default_page" id="is_default_page">
+            <input type="checkbox" name="is_default_page" id="is_default_page" value="1">
         </div>
     </div>
     <div>

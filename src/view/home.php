@@ -7,7 +7,7 @@
                     <h2>Votre site web, une fenêtre sur votre univers.</h2>
                     <p>Un CMS vous permet de gérer facilement votre contenu web, tout en vous offrant des possibilités infinies pour personnaliser votre site selon vos besoins spécifiques.</p>
                     <div class="text-center mt-3">
-                        <a href="/site" class="btn btn-light">Voir les sites</a>
+                        <a href="/sites/list" class="btn btn-light">Voir les sites</a>
                     </div>
                 </div>
             </div>
@@ -17,7 +17,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-12 col-md-6">
-                    <img src="" class="img-fluid" alt="Présentation">
+                    <img src="https://www.raphaelle-lecot.fr/images/cms.png" class="img-fluid" alt="Présentation">
                 </div>
                 <div class="col-12 col-md-6">
                     <h2>L'importance d'un CMS aujourd'hui</h2>

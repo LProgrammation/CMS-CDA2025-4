@@ -1,6 +1,10 @@
 <?php
 namespace Src\Controller;
+use Src\Model\LogsModel;
 use \Src\Model\UserModel;
+use Src\Module\Access;
+use Src\Module\Uuid;
+
 /**
  * Summary of homeController
  */
@@ -8,6 +12,11 @@ class loginController
 {
     public function index($routeMap, $uri)
     {
+        $accessModule = new Access();
+        if($accessModule->isGranted()){
+            header("location: /error?code=404");
+            exit();
+        }
         // Valeurs utilisées pour l'affichage
         $message = '';
 
@@ -39,6 +48,9 @@ class loginController
                     if (password_verify($password, $user['password_user'])) {
                         // Ajout des info du user dans la session et redirection vers l'accueil
                         $_SESSION['user'] = $user;
+                        $logs_model = new logsModel();
+                        $Uuid = new Uuid() ;
+                        $logs_model->setLogs($Uuid->guidv4(), $_SESSION['user']['id_user'], "l'utilisateur avec l'email $email vient de se connecter");
                         header('Location: /home');
                     }
                     else {

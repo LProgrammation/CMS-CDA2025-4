@@ -1,9 +1,10 @@
 <!-- Rappel : si le user est connecté, lui afficher ses sites dans une rubriques "mes sites", où il pourra supprimer, modifier et ajouter des pages/sites -->
 
-<a href="/sites/mysites">Mes sites</a>
-   
+<?php if($accessModule->isGranted()) : ?>
+    <a href="/sites/mysites">Mes sites</a>
+    <a href="/sites/new-site" class="mt-3 mb-5 text-center">Créer un site</a>
+<?php endif; ?>
 <h1 class="mt-3 mb-5 text-center">Liste des sites</h1>
-<a href="/sites/new-site" class="mt-3 mb-5 text-center">Créer un site</a>
 <div class="container">
     <div class="row">
         <?php /** @var TYPE_NAME $liste_sites */

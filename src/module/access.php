@@ -11,12 +11,14 @@ class Access {
      * @param mixed $role_check
      * @return bool
      */
-    public function isGranted(string $role_check = 'user'): bool {
+    public function isGranted(string $role_check = null): bool {
         if ($this->isLogin()) {
-            $userModel = new userModel(); // This have to be replace by usersModel class with user informations get in BDD
-            $user_info = $userModel->getUserById($_SESSION['user']['id_user']);
-
-            return $user_info && $role_check === $user_info[0]['role_user'];
+            if($role_check !== null){
+                $userModel = new userModel(); // This have to be replace by usersModel class with user informations get in BDD
+                $user_info = $userModel->getUserById($_SESSION['user']['id_user']);
+                return $user_info && $role_check === $user_info[0]['role_user'];
+            }
+            return true;
         }
 
         return false;

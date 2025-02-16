@@ -21,11 +21,13 @@
                             <input type="hidden" name="id_site" value="<?php echo $mon_site['id_site']; ?>">
                             <button type="submit" class="btn btn-primary" >Modifier</button>
                         </form>
+                        <?php if($accessModule->isGranted('admin'))  : ?>
                         <form method="POST" action="/sites/mysites">
                             <input type="hidden" name="id_site" value="<?php echo $mon_site['id_site'];
                             ?>">
                             <button type="submit" class="btn btn-primary" name="submit_delete">Supprimer</button>
                         </form>
+                        <?php endif ; ?>
                     </div>
                 </div>
             </div>

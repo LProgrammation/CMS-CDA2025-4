@@ -3,6 +3,10 @@ namespace Src\Model ;
 use Random\RandomException;
 use \Src\Module\Uuid ;
 class pageModel{
+    /**
+     * @param $id_site
+     * @return array
+     */
     public function getAllPagesBySite($id_site)
     {
         $pdo=BDD::getInstance();
@@ -16,6 +20,11 @@ class pageModel{
         $pdoStatement=$pdo->query($requete);
         return $pdoStatement->fetchAll();
     }
+
+    /**
+     * @param $id_page
+     * @return mixed
+     */
     public function getPageByID($id_page)
     {
         $pdo=BDD::getInstance();
@@ -29,6 +38,11 @@ class pageModel{
         $pdoStatement=$pdo->query($requete);
         return $pdoStatement->fetch();
     }
+
+    /**
+     * @param $id_site
+     * @return array
+     */
     public function getNavbarSite($id_site)
     {
         $pdo=BDD::getInstance();
@@ -38,12 +52,15 @@ class pageModel{
             FROM
                 page
             WHERE
-                id_site='".$id_site."' AND
-                type_page!='header' AND
-                type_page!='footer'";
+                id_site='".$id_site."'";
         $pdoStatement=$pdo->query($requete);
         return $pdoStatement->fetchAll();
     }
+
+    /**
+     * @param $id_page
+     * @return false|mixed
+     */
     public function getContentPage($id_page)
     {
         $pdo=BDD::getInstance();
@@ -59,6 +76,11 @@ class pageModel{
         if($content_page) return $content_page['content_page'];
         else return false;
     }
+
+    /**
+     * @param $id_page
+     * @return false|mixed
+     */
     public function getTitlePage($id_page)
     {
         $pdo=BDD::getInstance();
@@ -75,6 +97,11 @@ class pageModel{
         if ($content_page) return $content_page['title_page'];
         else return false;
     }
+
+    /**
+     * @param $user_id
+     * @return array
+     */
     public function getLogsByUserId($user_id)
     {
         $pdo=BDD::getInstance();
@@ -91,6 +118,14 @@ class pageModel{
     }
 
     /**
+     * @throws RandomException
+     */
+    /**
+     * @param $id_site
+     * @param $title_page
+     * @param $type_page
+     * @param $is_default_page
+     * @return string
      * @throws RandomException
      */
     public function newPage($id_site, $title_page, $type_page, $is_default_page)
@@ -128,6 +163,13 @@ class pageModel{
         ]);
         return $id_page;
     }
+
+    /**
+     * @param $id_site
+     * @param $id_page
+     * @param $content_page
+     * @return void
+     */
     public function savePage($id_site, $id_page, $content_page)
     {
         $pdo=BDD::getInstance();
@@ -148,6 +190,13 @@ class pageModel{
         ]);
 
     }
+
+    /**
+     * @param $id_site
+     * @param $id_page
+     * @param $title_page
+     * @return void
+     */
     public function updateTitlePage($id_site, $id_page, $title_page='')
     {
         $pdo=BDD::getInstance();
@@ -165,6 +214,12 @@ class pageModel{
             ':id_page'=>$id_page
         ]);
     }
+
+    /**
+     * @param $id_site
+     * @param $id_page
+     * @return void
+     */
     public function updateDefaultPage($id_site, $id_page)
     {
         $pdo=BDD::getInstance();
@@ -182,6 +237,11 @@ class pageModel{
             ':id_page'=>$id_page
         ]);
     }
+
+    /**
+     * @param $id_page
+     * @return void
+     */
     public function deletePage($id_page)
     {
         $pdo=BDD::getInstance();

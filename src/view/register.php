@@ -2,7 +2,7 @@
     <form id="register_form" action="" method="post">
         <a href="/home" class="text-body-secondary">Retour à l'accueil</a>
         <div class="mb-3">
-            <label class="h2">Connexion :</label>
+            <label class="h2">Inscription :</label>
         </div>
         <div class="mb-3">
             <div class="text-danger"><?php echo $message ?></div>

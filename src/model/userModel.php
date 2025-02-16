@@ -112,16 +112,20 @@ Class UserModel{
         }
     }
 
-    public function deleteUser(string $id)
-    {
-        try {
-            $pdo = BDD::getInstance();
-            $stmt = $pdo->prepare("DELETE FROM user WHERE id_user = :id");
-            $stmt->bindParam(":id", $id);
-            $stmt->execute();
-            return $stmt->rowCount();
-        } catch (PDOException $e) {
-            return null;
-        }
+    /**
+     * @param string $id
+     * @return int|null
+     */
+public function deleteUser(string $id)
+{
+    try {
+        $pdo = BDD::getInstance();
+        $stmt = $pdo->prepare("DELETE FROM user WHERE id_user = :id");
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        return $stmt->rowCount();
+    } catch (PDOException $e) {
+        return null;
     }
+}
 }

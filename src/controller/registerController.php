@@ -1,9 +1,16 @@
 <?php
 namespace Src\Controller ;
+use Src\Model\LogsModel;
 use \Src\Model\UserModel;
 use  \Src\Module\Uuid;
+use Src\Module\Access;
 class registerController{
     public function index($routeMap, $uri){
+        $accessModule = new Access();
+        if($accessModule->isGranted()){
+            header("location: /error?code=404");
+                exit();
+        }
 
         // Valeurs utilisées pour l'affichage
         $message = '';
@@ -39,10 +46,13 @@ class registerController{
                 } else {
                     // Création de l'utilisateur
                     $Uuid = new Uuid();
-                    $user = $userModel->registerUsers($Uuid->guidv4(),$firstname_user, $name_user, $email_user, password_hash($password_user, PASSWORD_BCRYPT));
+                    $user_id = $Uuid->guidv4(); // Déclaration de l'id user à l'avance pour l'enregistrement en log
+                    $user = $userModel->registerUsers($user_id,$firstname_user, $name_user, $email_user, password_hash($password_user, PASSWORD_BCRYPT));
 
                     if ($user) {
                         // Redirection
+                        $logs_model = new LogsModel();
+                        $logs_model->setLogs($Uuid->guidv4(),$user_id,"l'utilisateur avec l'email $email_user vient de s'inscrire et porte l'id $user_id");
                         header('Location: /login');
                     } else {
                         $message = 'Une erreur est survenue lors de la création de votre compte';

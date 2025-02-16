@@ -51,7 +51,7 @@
                     <?php endif;?>
                     <a href="/sites/list" class="p-2">site</a>
                     <?php
-                    if (isset($_SESSION['user'])) {
+                    if ($access->isGranted()) {
                         echo '<a href="/logout" class="p-2">Deconnexion</a>';
                     }else{
                         ?>

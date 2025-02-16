@@ -46,7 +46,7 @@ Class migrationFunction{
 
         }
         foreach($migrationToExecute as $migration){
-            require_once ('./migrations/' . $migration.'.php');
+            require_once (__DIR__ . '/migrations/' . $migration.'.php');
             $migrationClass = pathinfo($migration, PATHINFO_FILENAME);
             $migrationExecution = "\\ressources\\migrations\\" . $migrationClass;
             $migrationExecution = New $migrationExecution();
@@ -89,7 +89,7 @@ Class migrationFunction{
         // Revert migration list to start by last migration (Exemple : 1, 2, 3 -> 3, 2, 1.)
         rsort($migrationToExecute);
         foreach($migrationToExecute as $migration){
-            require_once ('./migrations/' . $migration.'.php');
+            require_once (__DIR__ . '/migrations/' . $migration.'.php');
             $migrationClass = pathinfo($migration, PATHINFO_FILENAME);
             $migrationExecution = "\\ressources\\migrations\\" . $migrationClass;
             $migrationExecution = New $migrationExecution();
@@ -125,7 +125,7 @@ Class migrationFunction{
             if (preg_match($pattern, $migrationClass, $matches)) {
                 $num = (int)$matches[1];
                 if ($num > $currentMigrationNumber) {
-                    require_once ('./migrations/' . $matches[0] . '.php');
+                    require_once (__DIR__ . '/migrations/' . $matches[0] . '.php');
                     echo "This update will be executed : $matches[0]\n";
                     $migrationExecution = "\\ressources\\migrations\\" . $matches[0];
                     $migrationExecution = New $migrationExecution();
@@ -157,7 +157,7 @@ Class migrationFunction{
             echo "The migrations history is empty, please make a migration(s) before use previous mode" ;
             return false ;
         }
-        require_once ('./migrations/' . $this->lastMigration. '.php');
+        require_once (__DIR__.'/migrations/' . $this->lastMigration. '.php');
 
         $migrationExecution = "\\ressources\\migrations\\" . $this->lastMigration;
         $migrationExecution = New $migrationExecution();

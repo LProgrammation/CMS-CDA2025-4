@@ -3,7 +3,9 @@ namespace Src\Model ;
 use PDO;
 use PDOException;
 class LogsModel{
-
+    /**
+     * @return array
+     */
     public function getLogs()
     {
         $pdo=BDD::getInstance();
@@ -15,6 +17,11 @@ class LogsModel{
         $pdoStatement=$pdo->query($requete);
         return $pdoStatement->fetchAll();
     }
+
+    /**
+     * @param $id_log
+     * @return array
+     */
     public function getLogById($id_log)
     {
         $pdo=BDD::getInstance();
@@ -28,6 +35,11 @@ class LogsModel{
         $pdoStatement=$pdo->query($requete);
         return $pdoStatement->fetchAll();
     }
+
+    /**
+     * @param $user_id
+     * @return array
+     */
     public function getLogsByUserId($user_id)
     {
         $pdo=BDD::getInstance();
@@ -41,6 +53,13 @@ class LogsModel{
         $pdoStatement=$pdo->query($requete);
         return $pdoStatement->fetchAll();
     }
+
+    /**
+     * @param $id_log
+     * @param $user_id
+     * @param $action_log
+     * @return false|\PDOStatement
+     */
     public function setLogs($id_log, $user_id, $action_log)
     {
         $pdo=BDD::getInstance();
