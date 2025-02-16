@@ -12,27 +12,16 @@ class monsiteController {
         require_once "../src/model/" . $routeMap[$uri]['name'] . "Model.php";
 
         $monsite_model = new monsiteModel();
-        $error = null;
-        $mon_sites = []; 
 
-        if (isset($_SESSION['utilisateur']['id_utilisateur'])) {
-            $role_utilisateur = $_SESSION['utilisateur']['role_utilisateur'];
-            $id_utilisateur = $_SESSION['utilisateur']['id_utilisateur'];
-
-            if ($role_utilisateur == "admin") {
-                // Si admin, récupérer tous les sites
-                $mon_sites = $monsite_model->getAllSites();
-            } else {
-                $mon_sites = $monsite_model->getSitesByUtilisateur($id_utilisateur);
-            }
-
-            if (!$mon_sites) {
-                $error = "Aucun site trouvé.";
-            } 
-        } else {
-            $error = "Utilisateur non connecté.";
+        if(isset($_POST['submit_delete'])) {
+            $monsite_model->deleteLeSite($_POST['site_id']);
         }
+
+        $error = null;
+        $mon_sites = $monsite_model->getMesSites($_SESSION['utilisateur']['role_utilisateur'], $_SESSION['utilisateur']['id_utilisateur']);
         require_once "../src/view/" . $routeMap[$uri]['name'] . ".php";
+
+
     }
 }
 

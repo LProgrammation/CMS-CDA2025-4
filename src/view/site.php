@@ -1,6 +1,3 @@
-
-
-
 <!-- Rappel : si le user est connecté, lui afficher ses sites dans une rubriques "mes sites", où il pourra supprimer, modifier et ajouter des pages/sites -->
 
 <a href="/monsite">Mon site</a>
