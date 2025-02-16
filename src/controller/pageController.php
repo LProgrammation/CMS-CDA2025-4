@@ -12,7 +12,10 @@ class pageController{
     public function index($routeMap, $uri){
         $Uuid = new Uuid() ;
         $accessModule = new Access();
-        $accessModule->isGranted();
+        if(!$accessModule->isGranted()){
+            header("location: /error?code=404");
+            exit();
+        }
 
         $page_model=new pageModel();
         $logs_model=new LogsModel();
@@ -39,8 +42,19 @@ class pageController{
                 break;
 
             case 'gestion-pages':
+                echo"<pre>";
+                print_r($_POST);
+                echo"</pre>";
                 $tabAllPages=$page_model->getNavbarSite($_GET['id_site']);
                 require_once "../src/view/".$routeMap[$uri]['name']."_gestion.php";
+                break;
+
+            case 'delete-page':
+                echo"<pre>";
+                print_r($_POST);
+                echo"</pre>";
+                $page=$page_model->getPageByID($_GET['id_page']);
+                require_once "../src/view/".$routeMap[$uri]['name']."_delete.php";
                 break;
 
             case null:
@@ -70,6 +84,16 @@ class pageController{
                             $logs_model->setLogs($Uuid->guidV4(), $_SESSION['user']['id_user'], $date->format("Y-m-d H:i:s"), "Création d'une nouvelle page avec l'id :$id_new_page pour le site avec l'id :$id_site");
 
                             break;
+
+                        case 'delete_page':
+                            echo"<pre>";
+                            print_r($_SESSION);
+                            echo"</pre>";
+                            $page=$page_model->getPageByID($_POST['id_page']);
+                            $page_model->deletePage($_POST['id_page']);
+                            $logs_model->setLogs($_SESSION['user']['id_user'], "Suppression de la page :'".$page['title_page']."' pour le site avec l'id :$id_site");
+                            break;
+
                         case 'save_page':
                             $page_model->savePage($_POST['id_site'],$_POST['id_page'],$_POST['content']);
                             $logs_model->setLogs($Uuid->guidV4(), $_SESSION['user']['id_user'], $date->format("Y-m-d H:i:s"), "Modification de la page avec l'id :".$_POST['id_page']." pour le site avec l'id :$id_site");

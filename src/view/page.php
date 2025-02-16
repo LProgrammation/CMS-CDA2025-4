@@ -1,3 +1,7 @@
+<form action="/voirsite" method="post">
+    <input type="hidden" name="id_site" id="id_site" value="<?=$id_site?>">
+    <button type="submit" class="btn btn-primary">Voir votre Site</button>
+</form>
 <form action="#" method="post">
     <input type="hidden" name="id_site" id="id_site" value="<?=$id_site?>">
     <input type="hidden" name="id_page" id="id_page" value="<?=$id_page?>">
@@ -13,10 +17,10 @@
             <button class="btn ms-3 border shadow-lg" onclick="event.preventDefault(); history.back();">Retour</button>
         </div>
         <div>
-            <a class="btn btn-primary me-2" href="/page/gestion-pages?id_site=<?=(isset($id_site))?$id_site:'1';?>">
+            <a class="btn btn-primary me-2" href="/page/gestion-pages?id_site=<?=$id_site;?>">
                 Gérer mes pages
             </a>
-            <a class="btn btn-primary me-2" href="/page/new-page?id_site=<?=(isset($id_site))?$id_site:'1';?>">
+            <a class="btn btn-primary me-2" href="/page/new-page?id_site=<?=$id_site;?>">
                 Nouvelle page
             </a>
         </div>

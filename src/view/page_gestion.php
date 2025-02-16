@@ -22,7 +22,9 @@
                         <td>
                             <input type="checkbox" class="checkbox-is-default-page" name="id_default_page" id="is_default_page_<?=$key?>" value="<?=$page['id_page']?>" <?=(($page['is_default_page']=='1')?'checked':'')?>>
                         </td>
-                        <td><i class="fa-solid fa-trash text-danger"></i></td>
+                        <td>
+                            <a href="/page/delete-page?id_page=<?=$page['id_page']?>&id_site=<?=$_GET['id_site']?>"><i class="fa-solid fa-trash text-danger"></i></a>
+                        </td>
                     </tr>
                 <?php
                 $compteur++;

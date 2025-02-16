@@ -16,6 +16,19 @@ class pageModel{
         $pdoStatement=$pdo->query($requete);
         return $pdoStatement->fetchAll();
     }
+    public function getPageByID($id_page)
+    {
+        $pdo=BDD::getInstance();
+        $requete="
+            SELECT
+                *
+            FROM
+                page
+            WHERE
+                id_page='".$id_page."'";
+        $pdoStatement=$pdo->query($requete);
+        return $pdoStatement->fetch();
+    }
     public function getNavbarSite($id_site)
     {
         $pdo=BDD::getInstance();
@@ -42,7 +55,6 @@ class pageModel{
             WHERE
                 id_page='".$id_page."'";
         $pdoStatement=$pdo->query($requete);
-
         $content_page=$pdoStatement->fetch();
         if($content_page) return $content_page['content_page'];
         else return false;
@@ -166,6 +178,20 @@ class pageModel{
         $pdoStatement=$pdo->prepare($requete);
         $pdoStatement->execute([
             ':id_site'=>$id_site,
+            ':id_page'=>$id_page
+        ]);
+    }
+    public function deletePage($id_page)
+    {
+        $pdo=BDD::getInstance();
+        $requete="
+        DELETE FROM
+           page
+        WHERE
+            id_page=:id_page
+        ";
+        $pdoStatement=$pdo->prepare($requete);
+        $pdoStatement->execute([
             ':id_page'=>$id_page
         ]);
     }

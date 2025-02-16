@@ -8,7 +8,10 @@ class LogsController
     public function index($routeMap, $uri): void
     {
         $accessModule = new Access();
-        $accessModule->isGranted();
+        if(!$accessModule->isGranted()){
+            header("location: /error?code=404");
+            exit();
+        }
         $logs_model = new LogsModel;
         $tab_logs=$logs_model->getLogs();
         require_once "../src/view/" . $routeMap[$uri]['name'] . ".php";

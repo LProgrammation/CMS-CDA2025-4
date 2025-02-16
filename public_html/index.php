@@ -36,6 +36,7 @@ $router->routeMap("GET", "/home", "home") ;
 $router->routeMap("GET", "/page", "page") ;
 $router->routeMap("GET", "/page/new-page", "page", "new-page") ;
 $router->routeMap("GET", "/page/gestion-pages", "page", "gestion-pages") ;
+$router->routeMap("GET", "/page/delete-page", "page", "delete-page") ;
 
 $router->routeMap("GET", "/logs", "logs") ;
 
@@ -52,4 +53,5 @@ $router->routeMap("GET", "/user_management", "user_management");
 
 // call router for actual $uri
 $router->match($uri) ;
+
 
