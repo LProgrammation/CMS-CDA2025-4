@@ -47,18 +47,26 @@ class LogsModel{
         INSERT INTO
             cms_logs
             (
+                id_logs,
                 id_user,
                 date_logs,
                 action_logs
             )
         VALUES
             (
-                ".$user_id.",
-                NOW(),
-                '".$action."'
+                :uuid,
+                :user_id,
+                :date,
+                :action
             )
         ";
-        $pdoStatement=$pdo->query($requete);
+        $pdoStatement=$pdo->prepare($requete);
+        $pdoStatement->execute([
+            ':uuid'=>guidv4(),
+            ':user_id'=>$user_id,
+            ':date'=>date('Y-m-d H:i:s'),
+            ':action'=>$action
+        ]);
         return $pdoStatement;
     }
 }

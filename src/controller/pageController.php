@@ -6,6 +6,7 @@ class pageController{
     public function index($routeMap, $uri){
         require_once "../src/model/".$routeMap[$uri]['name']."Model.php";
         require_once "../src/model/logsModel.php";
+        require_once "../src/module/uuid.php";
         $page_model=new pageModel();
         $logs_model=new LogsModel();
         switch($routeMap[$uri]['target']){
@@ -22,24 +23,17 @@ class pageController{
                     }
                 }
                 if(isset($_POST['create_page'])){
-                    require_once "../src/module/uuid.php";
                     $page_model->newPage($_POST['id_site'],$_POST['title_page'], $_POST['type_page']??'main',  $_POST['is_default_page']??'0');
                 }
                 require_once "../src/view/".$routeMap[$uri]['name']."_form.php";
                 break;
 
             case 'gestion-pages':
-                echo"<pre>";
-                print_r($_POST);
-                echo"</pre>";
                 $tabAllPages=$page_model->getNavbarSite($_GET['id_site']);
                 require_once "../src/view/".$routeMap[$uri]['name']."_gestion.php";
                 break;
 
             case 'delete-page':
-                echo"<pre>";
-                print_r($_POST);
-                echo"</pre>";
                 $page=$page_model->getPageByID($_GET['id_page']);
                 require_once "../src/view/".$routeMap[$uri]['name']."_delete.php";
                 break;
@@ -72,12 +66,11 @@ class pageController{
                             break;
 
                         case 'delete_page':
-                            echo"<pre>";
-                            print_r($_SESSION);
-                            echo"</pre>";
                             $page=$page_model->getPageByID($_POST['id_page']);
-                            $page_model->deletePage($_POST['id_page']);
-                            $logs_model->setLogs($_SESSION['user']['id_user'], "Suppression de la page :'".$page['title_page']."' pour le site avec l'id :$id_site");
+                            if($page!=null){
+                                $page_model->deletePage($_POST['id_page']);
+                                $logs_model->setLogs($_SESSION['user']['id_user'], "Suppression de la page :'".$page['title_page']."' pour le site avec l'id :$id_site");
+                            }
                             break;
 
                         case 'save_page':
