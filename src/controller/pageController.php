@@ -29,8 +29,19 @@ class pageController{
                 break;
 
             case 'gestion-pages':
+                echo"<pre>";
+                print_r($_POST);
+                echo"</pre>";
                 $tabAllPages=$page_model->getNavbarSite($_GET['id_site']);
                 require_once "../src/view/".$routeMap[$uri]['name']."_gestion.php";
+                break;
+
+            case 'delete-page':
+                echo"<pre>";
+                print_r($_POST);
+                echo"</pre>";
+                $page=$page_model->getPageByID($_GET['id_page']);
+                require_once "../src/view/".$routeMap[$uri]['name']."_delete.php";
                 break;
 
             case null:
@@ -48,7 +59,7 @@ class pageController{
                                     $page_model->updateDefaultPage($_POST['id_site'], $_POST['id_default_page']);
                                 }
                             }
-                            $logs_model->setLogs($_SESSION['id_user'], "Modification des pages du site avec l'id :$id_site");
+                            $logs_model->setLogs($_SESSION['user']['id_user'], "Modification des pages du site avec l'id :$id_site");
                             break;
                         case 'create_page':
                             require_once "../src/module/uuid.php";
@@ -56,12 +67,22 @@ class pageController{
                             if(isset($_POST['is_default_page'])){
                                 $page_model->updateDefaultPage($_POST['id_site'], $id_new_page);
                             }
-                            $logs_model->setLogs($_SESSION['id_user'], "Création d'une nouvelle page avec l'id :$id_new_page pour le site avec l'id :$id_site");
+                            $logs_model->setLogs($_SESSION['user']['id_user'], "Création d'une nouvelle page avec l'id :$id_new_page pour le site avec l'id :$id_site");
 
                             break;
+
+                        case 'delete_page':
+                            echo"<pre>";
+                            print_r($_SESSION);
+                            echo"</pre>";
+                            $page=$page_model->getPageByID($_POST['id_page']);
+                            $page_model->deletePage($_POST['id_page']);
+                            $logs_model->setLogs($_SESSION['user']['id_user'], "Suppression de la page :'".$page['title_page']."' pour le site avec l'id :$id_site");
+                            break;
+
                         case 'save_page':
                             $page_model->savePage($_POST['id_site'],$_POST['id_page'],$_POST['content']);
-                            $logs_model->setLogs($_SESSION['id_user'], "Modification de la page avec l'id :".$_POST['id_page']." pour le site avec l'id :$id_site");
+                            $logs_model->setLogs($_SESSION['user']['id_user'], "Modification de la page avec l'id :".$_POST['id_page']." pour le site avec l'id :$id_site");
                             break;
                     }
                 }
