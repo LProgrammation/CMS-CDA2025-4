@@ -14,9 +14,10 @@
     <div class="d-flex justify-content-between">
         <div>
             <button type="submit" class="btn btn-primary" name="name_form" value="save_page">Enregistrer</button>
-            <button class="btn ms-3 border shadow-lg" onclick="event.preventDefault(); history.back();">Retour</button>
+
         </div>
         <div>
+
             <a class="btn btn-primary me-2" href="/page/gestion-pages?id_site=<?=$id_site;?>">
                 Gérer mes pages
             </a>
